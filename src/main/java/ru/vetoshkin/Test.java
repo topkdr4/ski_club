@@ -18,8 +18,8 @@ import javax.ws.rs.core.MediaType;
  * Ветошкин А.В. РИС-16бзу
  * */
 @Path("/go")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.TEXT_PLAIN)
+@Produces(MediaType.TEXT_PLAIN)
 public class Test {
 
     private static final Logger logger = LogManager.getLogger(Test.class);
@@ -27,9 +27,8 @@ public class Test {
 
     @GET
     @Path("/now")
-    public String go() {
+    public void go() {
         logger.info("OLOLOL");
-        return "";
     }
 
 
