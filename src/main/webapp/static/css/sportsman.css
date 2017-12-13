@@ -1,0 +1,81 @@
+.sportsman-card {
+    width:                      350px;
+    height:                     200px;
+    background-color:           #FAFAFA;
+    border-radius:              2px;
+    box-shadow:                 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition:                 all 0.2s ease-in-out;
+    box-sizing:                 border-box;
+    display:                    flex;
+    flex-direction:             column;
+    user-select:                none;
+    cursor:                     pointer;
+    border:                     15px solid #03A9F4;
+}
+
+
+.sportsman-card:hover {
+    box-shadow:                 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+
+.sportsman-content-container {
+    box-sizing:                 border-box;
+    display:                    flex;
+    flex-direction:             row;
+    height:                     100%;
+}
+
+
+.sportsman-picture {
+    display:                    flex;
+    box-sizing:                 border-box;
+    border:                     1px solid rgba(0,0,0,0.12);
+    width:                      35%;
+    background-image:           url("https://kor.ill.in.ua/m/400x253/2090071.jpg");
+    background-size:            cover;
+}
+
+
+.sportsman-info {
+    display:                    flex;
+    box-sizing:                 border-box;
+    border:                     1px solid rgba(0,0,0,0.12);
+    width:                      65%;
+    padding:                    10px;
+    flex-direction:             column;
+}
+
+
+.sportsman-info-title-column {
+    font-weight:                bold;
+    text-align:                 left;
+    font-size:                  16px;
+}
+
+
+.sportsman-info-title-value {
+    text-align:                 right;
+    font-style: italic;
+}
+
+
+.remove-block {
+    width:                      100%;
+}
+
+
+.sportsman-remove {
+    background-image:           url("../icons/remove.svg");
+    background-size:            cover;
+    width:                      15px;
+    height:                     15px;
+    float:                      right;
+    margin-right:               -15px;
+    margin-top:                 -15px;
+}
+
+
+.sportsman-remove-notify {
+    border:                     15px solid #f44336;
+}
