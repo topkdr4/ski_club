@@ -1,9 +1,10 @@
 body {
-    /*margin:                 0;*/
+    margin:                 0;
     padding:                0;
     display:                flex;
     font-family:            Roboto;
     height:                 100%;
     background-color:       #EEEEEE;
     font-style:             14px;
+    flex-direction:         column;
 }

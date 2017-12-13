@@ -1,5 +1,5 @@
 .sportsman-card {
-    width:                      350px;
+    width:                      320px;
     height:                     200px;
     background-color:           #FAFAFA;
     border-radius:              2px;
@@ -10,7 +10,8 @@
     flex-direction:             column;
     user-select:                none;
     cursor:                     pointer;
-    border:                     15px solid #03A9F4;
+    border:                     15px solid #FAFAFA;
+    margin:                     20px;
 }
 
 

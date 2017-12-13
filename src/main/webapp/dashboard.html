@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+
+    <link rel="stylesheet" href="static/css/sportsman.css">
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/dashboard.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="static/js/vue.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="menu-item champions">Рекорды</div>
+        <div class="menu-item table">Нормативы</div>
+    </header>
+
+    <div id="container">
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app" class="sportsman-card"
+             @mouseover  ="showRemoveButton"
+             @mouseleave ="hideRemoveButton"
+             v-bind:class="{ 'sportsman-remove-notify': isRemoved }">
+
+            <div class="remove-block">
+                <div v-if        ="hover"
+                     @click      ="removeSportsman"
+                     @mouseover  ="showDangerSection"
+                     @mouseleave ="hideDangerSection"
+                     class="sportsman-remove"></div>
+            </div>
+
+            <div class="sportsman-content-container">
+                <div class="sportsman-picture"
+                     v-bind:style="{ backgroundImage: 'url(' + picture + ')' }">
+                </div>
+                <div class="sportsman-info">
+                    <div class="sportsman-info-title-column">Фамилия:</div>
+                    <div class="sportsman-info-title-value">{{title}}</div>
+
+                    <div class="sportsman-info-title-column">Дата рождения:</div>
+                    <div class="sportsman-info-title-value">{{birth}}</div>
+
+                    <div class="sportsman-info-title-column">Квалификация:</div>
+                    <div class="sportsman-info-title-value">{{qualification}}</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                picture: 'https://kor.ill.in.ua/m/400x253/2090071.jpg',
+                hover: false,
+                isRemoved: false,
+                title: 'Фамилия',
+                birth: '03.06.1994',
+                qualification: 'Мастер спорта международного класса'
+            },
+            methods: {
+                showRemoveButton: function() {
+                    this.hover = true;
+                },
+                hideRemoveButton: function () {
+                    this.hover = false;
+                },
+                showDangerSection: function () {
+                    this.isRemoved = true;
+                },
+                hideDangerSection: function () {
+                    this.isRemoved = false;
+                },
+                removeSportsman: function () {
+                    console.log('removed!!')
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
