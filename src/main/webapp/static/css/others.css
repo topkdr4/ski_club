@@ -1,0 +1,62 @@
+.trampliner-logo {
+    background:             url("../icons/trampliner.png") no-repeat;
+    background-size:        contain;
+    padding-left:           100px;
+    font-size:              32px;
+}
+
+
+.person {
+    display:                flex;
+    flex-direction:         row;
+    box-sizing:             border-box;
+    height:                 250px;
+    font-size:              16px;
+}
+
+
+.person-image {
+    display:                flex;
+    border:                 1px solid rgba(0,0,0,0.14);
+    box-sizing:             border-box;
+    width:                  40%;
+    /*background:             url("../icons/ski_jumper.jpg") no-repeat;*/
+    background-size:        contain;
+}
+
+.man {
+    background:             url("../icons/man_ski.png") no-repeat center;
+    background-size:        contain;
+}
+
+
+.wom {
+    background:             url("../icons/wom_ski.png") no-repeat center;
+    background-size:        contain;
+}
+
+
+.person-info {
+    display:                flex;
+    border:                 1px solid rgba(0,0,0,0.14);
+    border-bottom:          none;
+    border-left:            none;
+    box-sizing:             border-box;
+    width:                  60%;
+    flex-direction:         column;
+}
+
+
+.person-info-item {
+    display:                flex;
+    box-sizing:             border-box;
+    height:                 60px;
+    align-items:            center;
+    word-break:             keep-all;
+    padding:                10px;
+}
+
+.person-info-item:nth-child(even) {
+    border-top:             1px solid rgba(0,0,0,0.14);
+    border-bottom:          1px solid rgba(0,0,0,0.14);
+}
