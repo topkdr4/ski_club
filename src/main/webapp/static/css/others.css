@@ -12,6 +12,8 @@
     box-sizing:             border-box;
     height:                 250px;
     font-size:              16px;
+    user-select:            none;
+    cursor:                 pointer;
 }
 
 
@@ -59,4 +61,9 @@
 .person-info-item:nth-child(even) {
     border-top:             1px solid rgba(0,0,0,0.14);
     border-bottom:          1px solid rgba(0,0,0,0.14);
+}
+
+
+.collapsible-body > li {
+    cursor:                 pointer;
 }
