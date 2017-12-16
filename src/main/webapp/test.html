@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
 
@@ -91,7 +91,7 @@
     </div>
 
     <div class="col s10">
-        <div class="row">
+        <div class="row" id="sportsman-list">
 
             <div class="col s12">
                 <div class="input-field">
@@ -100,73 +100,12 @@
                 </div>
             </div>
 
-            <div class="col s4">
-                <div id="app1" class="card hoverable">
-                    <div class="person card-content">
-                        <div class="person-image wom"></div>
-                        <div class="person-info">
-                            <div class="person-info-item">
-                                <span>{{title}}</span>
-                            </div>
-                            <div class="person-info-item">
-                                <span>{{ages}}</span>
-                            </div>
-                            <div class="person-info-item">
-                                <span>Состоит в клубе с: {{startedFrom}}</span>
-                            </div>
-                            <div class="person-info-item">
-                                <span>Квалификация: {{qualification}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <sportsman-cards
+                    v-for="(item, index) in sportsmans"
+                    v-bind:sportsman="item"
+            ></sportsman-cards>
 
-            <div class="col s4">
-                <div id="app2" class="card hoverable">
-                    <div class="person card-content">
-                        <div class="person-image man"></div>
-                        <div class="person-info">
-                            <div class="person-info-item">
-                                <!--<span>Ветошкин Александр Владимирович</span>-->
-                            </div>
-                            <div class="person-info-item">
-                                <!--<span>23 года</span>-->
-                            </div>
-                            <div class="person-info-item">
-                                <!--<span>Состоит в клубе с: 11.02.2010г.</span>-->
-                            </div>
-                            <div class="person-info-item">
-                                <!--<span>Квалификация: Нет</span>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s4">
-                <div id="app3" class="card hoverable">
-                    <div class="person card-content">
-                        <div class="person-image man"></div>
-                        <div class="person-info">
-                            <div class="person-info-item">
-                                <span></span>
-                            </div>
-                            <div class="person-info-item">
-                                <span></span>
-                            </div>
-                            <div class="person-info-item">
-                                <span></span>
-                            </div>
-                            <div class="person-info-item">
-                                <span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12">
+            <div class="col s12" id="paggins" @click="changePage">
                 <ul class="pagination">
                     <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                     <li class="active teal"><a href="#!">1</a></li>
@@ -188,18 +127,51 @@
     <script type="text/javascript" src="static/js/jquery.js"></script>
     <script type="text/javascript" src="static/lib/materialize/js/materialize.min.js"></script>
     <script type="text/javascript" src="static/js/vue.js"></script>
+    <script type="text/javascript" src="static/vue/sportsman-card.js"></script>
+    <script type="text/javascript" src="static/js/pagniation.js"></script>
 
-    <script type="text/javascript">
-        var app = new Vue({
-            el: '#app1',
-            data: {
-                title: 'Юдкина Екатерина Евгеньевна',
-                ages: '23 года',
-                startedFrom: '18.04.2012г.',
-                qualification: 'МСМК'
+<script>
+
+    var sportsss = [{
+        title: 'Юдкина Екатерина Евгеньевна',
+        ages:  '23 года',
+        startedFrom: '11.02.2013г.',
+        qualification: 'МСМК',
+        sex: false
+    }, {
+        title: 'Ветошкин Александр Владимирович',
+        ages:  '23 года',
+        startedFrom: '13.02.2010г.',
+        qualification: 'Нет',
+        sex: true
+    }];
+
+    var paginations = new Pagination({
+        source: sportsss,
+        count:  9
+    });
+
+
+    var apps = new Vue({
+        el: '#sportsman-list',
+        data: {
+            sportsmans: sportsss
+        }
+    });
+
+
+    new Vue({
+        el: '#paggins',
+        data: {
+        },
+        methods: {
+            changePage: function(event) {
+                console.log(event);
             }
-        });
-    </script>
+        }
+    });
+
+</script>
 
 </body>
 </html>
