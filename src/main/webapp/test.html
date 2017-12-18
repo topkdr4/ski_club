@@ -11,6 +11,9 @@
 </head>
 <body>
 
+<div class="hover" if-v="show">
+</div>
+
 <nav class="teal darken-2">
     <div class="nav-wrapper">
         <div class="trampliner-logo">Клуб «Летающий лыжник»</div>
@@ -105,7 +108,7 @@
                     v-bind:sportsman="item"
             ></sportsman-cards>
 
-            <div class="col s12" id="paggins" @click="changePage">
+            <div class="col s12" id="paggins">
                 <ul class="pagination">
                     <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                     <li class="active teal"><a href="#!">1</a></li>
@@ -123,12 +126,12 @@
 
 </div>
 
-
-    <script type="text/javascript" src="static/js/jquery.js"></script>
-    <script type="text/javascript" src="static/lib/materialize/js/materialize.min.js"></script>
-    <script type="text/javascript" src="static/js/vue.js"></script>
-    <script type="text/javascript" src="static/vue/sportsman-card.js"></script>
-    <script type="text/javascript" src="static/js/pagniation.js"></script>
+<script type="text/javascript" src="static/js/jquery.js"></script>
+<script type="text/javascript" src="static/lib/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="static/js/vue.js"></script>
+<script type="text/javascript" src="static/vue/sportsman-card.js"></script>
+<script type="text/javascript" src="static/js/pagniation.js"></script>
+<script type="text/javascript" src="static/js/app.js"></script>
 
 <script>
 
@@ -170,6 +173,14 @@
             }
         }
     });
+
+    var hover = new Vue({
+        el: '.hover',
+        data: {
+            show: false
+        }
+    });
+
 
 </script>
 
