@@ -76,3 +76,16 @@
     height:                 100%;
     z-index:                10;
 }
+
+
+.person-image-preview {
+    height:                 250px;
+    width:                  100%;
+    background:             url("../icons/man_ski.png") center center no-repeat;
+    background-size:        contain;
+}
+
+
+.tabes .indicator {
+    background-color:       #00796b !important;
+}
