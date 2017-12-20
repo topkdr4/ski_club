@@ -8,7 +8,7 @@
     <link type="text/css" rel="stylesheet" href="static/lib/materialize/css/materialize.min.css"
           media="screen,projection"/>
 
-    <title>Форма добавления спортсмена</title>
+    <title>Новый норматив</title>
 </head>
 <body>
 
@@ -93,96 +93,56 @@
 
     <div class="col s10">
 
-        <div class="row" id="sportsman-form">
+        <div class="row card" id="specification-form">
 
             <div class="row">
 
-                <div class="col s3 card">
-                    <div class="col s12">
-                        <div class="person-image-preview"></div>
-                    </div>
-                    <div class="col s12">
-                        <div class="file-field input-field">
-                            <div class="btn teal darken-2">
-                                <span>Изображение</span>
-                                <input type="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
-                    </div>
+                <div class="input-field col s6">
+                    <select>
+                        <option value="1" selected>Мужчины</option>
+                        <option value="2">Женщины</option>
+                    </select>
+                    <label>Пол</label>
                 </div>
 
-                <div class="col s9 card">
-                    <div class="row">
+                <div class="input-field col s6">
+                    <select>
+                        <option value="1" selected>8-14</option>
+                        <option value="2">15-18</option>
+                        <option value="3">19-29</option>
+                        <option value="4">30-39</option>
+                        <option value="5">40-49</option>
+                    </select>
+                    <label>Возраст</label>
+                </div>
 
-                        <div class="input-field col s4">
-                            <input id="family" type="text" class="validate">
-                            <label for="family">Фамилия</label>
-                        </div>
+                <div class="input-field col s12">
+                    <input placeholder="" id="specification-name" type="text" class="validate">
+                    <label for="specification-name">Название норматива</label>
+                </div>
 
-                        <div class="input-field col s4">
-                            <input id="name" type="text" class="validate">
-                            <label for="name">Имя</label>
-                        </div>
+                <div class="input-field col s12">
+                    <textarea id="specification-description" class="materialize-textarea"></textarea>
+                    <label for="specification-description">Описание неорматива</label>
+                </div>
 
-                        <div class="input-field col s4">
-                            <input id="sub_name" type="text" class="validate">
-                            <label for="sub_name">Отчество</label>
-                        </div>
+                <div class="input-field col s6">
+                    <select>
+                        <option value="1" selected>Время</option>
+                        <option value="2">Количество</option>
+                    </select>
+                    <label>Тип измерения</label>
+                </div>
 
-                        <div class="input-field col s4">
-                            <select>
-                                <option value="" disabled selected>Квалификация</option>
-                                <option value="1">Мастер спорта международного класса</option>
-                                <option value="2">Мастер спорта</option>
-                                <option value="3">Кандидат в мастера спорта</option>
-                                <option value="4">I разряд</option>
-                                <option value="5">II разряд</option>
-                                <option value="6">III разряд</option>
-                                <option value="7">Нет</option>
-                            </select>
-                        </div>
+                <div class="input-field col s6">
+                    <input placeholder="" id="specification-require" type="text" class="validate">
+                    <label for="specification-require">Для выполнения норматива, необходимо:</label>
+                </div>
 
-                        <div class="input-field col s4">
-                            <input id="weight" type="number" class="validate">
-                            <label for="weight">Вес</label>
-                        </div>
-
-                        <div class="input-field col s4">
-                            <input id="height" type="number" class="validate">
-                            <label for="height">Рост</label>
-                        </div>
-
-                        <div class="input-field col s3">
-                            <input id="dayOfBirth" type="text" class="datepicker">
-                            <label for="dayOfBirth">Дата рождения</label>
-                        </div>
-
-                        <div class="input-field col s3">
-                            <input id="sportStart" type="text" class="datepicker">
-                            <label for="sportStart">Начало занятий</label>
-                        </div>
-
-                        <div class="col s3">
-                            <p>
-                                <input name="sex" type="radio" id="man-sex" checked />
-                                <label for="man-sex">Мужской</label>
-                            </p>
-                            <p>
-                                <input name="sex" type="radio" id="wom-sex"/>
-                                <label for="wom-sex">Женский</label>
-                            </p>
-                        </div>
-
-                        <div class="col s3">
-                            <p>
-                                <a class="waves-effect waves-light btn-large teal darken-2">Сохранить</a>
-                            </p>
-                        </div>
-
-                    </div>
+                <div class="col s12">
+                    <p>
+                        <a class="waves-effect waves-light btn-large teal darken-2">Сохранить</a>
+                    </p>
                 </div>
 
             </div>
