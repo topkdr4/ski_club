@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="static/css/others.css">
-    <link type="text/css" rel="stylesheet" href="static/lib/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="static/lib/materialize/css/materialize.min.css" media="screen,projection"/>
 
-    <title></title>
+    <title>Тренерский состав</title>
 </head>
 <body>
 
@@ -91,19 +91,36 @@
     </div>
 
     <div class="col s10">
-        <div class="row" id="sportsman-list">
+        <div class="row" id="trainer-list">
 
             <div class="col s12">
                 <div class="input-field">
-                    <input id="search" type="search" required style="text-indent: 50px;">
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <input id="search-trainer" type="search" required style="text-indent: 50px;">
+                    <label class="label-icon" for="search-trainer"><i class="material-icons">search</i></label>
                 </div>
             </div>
 
-            <sportsman-cards
-                    v-for="(item, index) in sportsmans"
-                    v-bind:sportsman="item"
-            ></sportsman-cards>
+            <div class="col s4">
+                <div class="card hoverable">
+                    <div class="trainer">
+                        <div class="trainer-info">
+                            <div class="trainer-info-item">
+                                <span>{{trainer.family}}</span>
+                            </div>
+                            <div class="trainer-info-item">
+                                <span>{{trainer.name}}</span>
+                            </div>
+                            <div class="trainer-info-item">
+                                <span>{{trainer.startedFrom}}</span>
+                            </div>
+                            <div class="trainer-info-item">
+                                <!--<span>Квалификация: {{trainer.qualification}}</span>-->
+                                <span>Инструктор, инструктор-методист среднего уровня квалификации первой категории</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="col s12" id="paggins">
                 <ul class="pagination">
@@ -130,56 +147,6 @@
 <script type="text/javascript" src="static/js/pagniation.js"></script>
 <script type="text/javascript" src="static/js/app.js"></script>
 
-<script>
-
-    var sportsss = [{
-        title: 'Юдкина Екатерина Евгеньевна',
-        ages:  '23 года',
-        startedFrom: '11.02.2013г.',
-        qualification: 'МСМК',
-        sex: false
-    }, {
-        title: 'Ветошкин Александр Владимирович',
-        ages:  '23 года',
-        startedFrom: '13.02.2010г.',
-        qualification: 'Нет',
-        sex: true
-    }];
-
-    var paginations = new Pagination({
-        source: sportsss,
-        count:  9
-    });
-
-
-    var apps = new Vue({
-        el: '#sportsman-list',
-        data: {
-            sportsmans: sportsss
-        }
-    });
-
-
-    new Vue({
-        el: '#paggins',
-        data: {
-        },
-        methods: {
-            changePage: function(event) {
-                console.log(event);
-            }
-        }
-    });
-
-    var hover = new Vue({
-        el: '.hover',
-        data: {
-            show: false
-        }
-    });
-
-
-</script>
 
 </body>
 </html>

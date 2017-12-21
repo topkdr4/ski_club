@@ -16,6 +16,11 @@
     cursor:                 pointer;
 }
 
+.trainer {
+    user-select:            none;
+    cursor:                 pointer;
+}
+
 
 .person-image {
     display:                flex;
@@ -49,13 +54,18 @@
 }
 
 
-.person-info-item {
+.person-info-item, .trainer-info-item {
     display:                flex;
     box-sizing:             border-box;
     height:                 60px;
     align-items:            center;
     word-break:             keep-all;
     padding:                10px;
+}
+
+
+.trainer-info-item {
+    border-bottom:          1px solid rgba(0,0,0,0.14);
 }
 
 .person-info-item:nth-child(even) {
