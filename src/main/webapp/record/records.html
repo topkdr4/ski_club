@@ -161,12 +161,57 @@
 
 
 <script type="text/javascript" src="../static/js/jquery.js"></script>
+<script type="text/javascript" src="../static/js/highcharts.js"></script>
 <script type="text/javascript" src="../static/lib/materialize/js/materialize.min.js"></script>
 
 <script>
     $(document).ready(function() {
         $('ul.tabs').tabs();
         $('select').material_select();
+
+        var balls = [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6];
+        var place = [];
+
+        for (var i = 0; i < balls.length; i++) {
+            place.push(balls.length - i);
+        }
+
+        balls.sort(function(first, second) {
+            return first - second;
+        });
+
+        Highcharts.chart('graph', {
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                categories: place
+            },
+            yAxis: {
+                title: {
+                    text: 'Баллы'
+                }
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br> <a href="">link</a> <br>',
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: 'Дальность прыжка',
+                data: balls
+            }]
+        });
     });
 
 </script>
