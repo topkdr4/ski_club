@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="../static/css/others.css">
     <link type="text/css" rel="stylesheet" href="../static/lib/materialize/css/materialize.min.css" media="screen,projection"/>
 
-    <title>Список нормативов</title>
+    <title>Список соревнований</title>
 </head>
 <body>
 
@@ -105,43 +105,32 @@
                 </div>
 
                 <div class="input-field col s6">
-                    <select>
-                        <option value="1" selected>8-14</option>
-                        <option value="2">15-18</option>
-                        <option value="3">19-29</option>
-                        <option value="4">30-39</option>
-                        <option value="5">40-49</option>
-                    </select>
-                    <label>Возраст</label>
+                    <input id="dayOfBirth" type="text" class="datepicker">
+                    <label for="dayOfBirth">Дата Соревнования</label>
                 </div>
 
             </div>
 
             <div class="row card">
-                <table class="bordered">
+                <table class="striped centered">
 
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Название</th>
-                            <th>Тип измерения</th>
-                            <th>Требования</th>
-                            <th>Описание</th>
+                            <th>Результаты</th>
                         </tr>
                     </thead>
 
                     <tbody>
-
                         <tr>
-                            <td>Отжимание</td>
-                            <td>Количество</td>
-                            <td>30</td>
-                            <td><a class="modal-trigger" href="#specification-extra-description">Подробнее</a></td>
+                            <td>1</td>
+                            <td>Чемпионат клуба</td>
+                            <td><a class="modal-trigger" href="#game-description">Подробнее</a></td>
                         </tr>
-
                     </tbody>
 
                 </table>
-
             </div>
 
         </div>
@@ -150,31 +139,42 @@
 </div>
 
 
-<div id="specification-extra-description" class="modal modal-fixed-footer">
+<div id="game-description" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <h4>Отжимания</h4>
-        <p>
-            Проводится в спортивном зале, разрешается одна попытка. <br>
-            <u><b>Описание теста:</b></u> Сгибание и разгибание рук в упоре лежа выполняется из ИП: упор
-            лежа на полу, руки на ширине плеч, кисти вперед, локти разведены не более 45 градусов,
-            плечи, туловище и ноги составляют прямую линию. Стопы упираются в пол без опоры
-            вместе. Сгибая руки в локтевых суставах необходимо коснуться грудью пола (или платформы
-            высотой 5 см), затем, разгибая руки, вернуться в ИП и, зафиксировав его на 0,5 сек.,
-            продолжить выполнение упражнения. <br>
-            <u><b>Результат:</b></u> Засчитывается количество правильно выполненных сгибаний и
-            разгибаний рук, фиксируемых счетом судьи. Разрешается одна попытка. <br>
-            <u><b>Ошибки:</b></u><br>
-            1) касание пола коленями, бедрами, тазом;<br>
-            2) нарушение прямой линии "плечи - туловище - ноги";<br>
-            3) отсутствие фиксации на 0,5 сек. ИП;<br>
-            4) разновременное разгибание рук. <br>
-        </p>
+        <div class="row">
+            <div class="col s12">
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ФИО</th>
+                            <th>Разряд</th>
+                            <th>Длина прыжка</th>
+                            <th colspan="5">Очки за технику</th>
+                        </tr>
+
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>D</th>
+                            <th>E</th>
+                        </tr>
+
+                    </thead>
+
+                </table>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Удалить</a>
     </div>
 </div>
-
 
 <script type="text/javascript" src="../static/js/jquery.js"></script>
 <script type="text/javascript" src="../static/lib/materialize/js/materialize.min.js"></script>
@@ -183,6 +183,14 @@
     $(document).ready(function() {
         $('select').material_select();
         $('.modal').modal();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Сегодня',
+            clear: 'Отчистить',
+            close: 'Ok',
+            closeOnSelect: false // Close upon selecting a date,
+        });
     });
 
 </script>
