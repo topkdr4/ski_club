@@ -126,7 +126,7 @@
                         <tr>
                             <td>1</td>
                             <td>Чемпионат клуба</td>
-                            <td><a class="modal-trigger" href="#game-description">Подробнее</a></td>
+                            <td><a href="#game-description">Подробнее</a></td>
                         </tr>
                     </tbody>
 
@@ -139,50 +139,12 @@
 </div>
 
 
-<div id="game-description" class="modal modal-fixed-footer">
-    <div class="modal-content">
-        <div class="row">
-            <div class="col s12">
-                <table>
-
-                    <thead>
-
-                        <tr>
-                            <th>ФИО</th>
-                            <th>Разряд</th>
-                            <th>Длина прыжка</th>
-                            <th colspan="5">Очки за технику</th>
-                        </tr>
-
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>A</th>
-                            <th>B</th>
-                            <th>C</th>
-                            <th>D</th>
-                            <th>E</th>
-                        </tr>
-
-                    </thead>
-
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Удалить</a>
-    </div>
-</div>
-
 <script type="text/javascript" src="../static/js/jquery.js"></script>
 <script type="text/javascript" src="../static/lib/materialize/js/materialize.min.js"></script>
 
 <script>
     $(document).ready(function() {
         $('select').material_select();
-        $('.modal').modal();
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year,
