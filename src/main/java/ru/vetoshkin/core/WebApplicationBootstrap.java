@@ -1,4 +1,4 @@
-package ru.vetoshkin;
+package ru.vetoshkin.core;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

@@ -21,11 +21,11 @@ import java.util.List;
  * даты выполнения спортивных нормативов
  * и физиологические характеристики спортсмена в это время)
  * */
-public class Sprotsman {
+public class Sportsman {
 
     private String id;
     private String family;
-    private Qualification qualification;
+    private SportsmanQualification qualification;
     private float weight;
     private long birthday;
     private int yearOfStart;
