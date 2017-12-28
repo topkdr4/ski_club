@@ -2,7 +2,7 @@ package ru.vetoshkin.rest;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import ru.vetoshkin.Sportsman;
+import ru.vetoshkin.bean.Sportsman;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;

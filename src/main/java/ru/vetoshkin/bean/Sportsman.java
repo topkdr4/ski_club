@@ -1,8 +1,11 @@
-package ru.vetoshkin;
+package ru.vetoshkin.bean;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
 
+
+import ru.vetoshkin.SportsmanQualification;
+import ru.vetoshkin.Standard;
 
 import java.util.Collections;
 import java.util.List;
