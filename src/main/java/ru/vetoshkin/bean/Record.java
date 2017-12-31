@@ -1,4 +1,4 @@
-package ru.vetoshkin.service;
+package ru.vetoshkin.bean;
 
 public enum Record {
 
