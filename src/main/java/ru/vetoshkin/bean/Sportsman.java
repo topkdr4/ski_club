@@ -8,6 +8,7 @@ import ru.vetoshkin.SportsmanQualification;
 import ru.vetoshkin.Standard;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,7 +31,7 @@ public class Sportsman {
     private String family;
     private SportsmanQualification qualification;
     private float weight;
-    private long birthday;
+    private Date birthDay;
     private int yearOfStart;
     private List<Standard> standards = Collections.emptyList();
 

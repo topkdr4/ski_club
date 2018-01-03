@@ -27,7 +27,7 @@ public class HikariPool {
         configuration.setJdbcUrl(dbProperties.getProperty("db.host"));
         configuration.setUsername(dbProperties.getProperty("db.user"));
         configuration.setPassword(dbProperties.getProperty("db.password"));
-        configuration.setSchema(dbProperties.getProperty("db.scheme"));
+        configuration.setCatalog(dbProperties.getProperty("db.catalog"));
         configuration.setMaximumPoolSize(15);
         configuration.setAutoCommit(true);
 
