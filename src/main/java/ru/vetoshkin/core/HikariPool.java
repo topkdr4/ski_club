@@ -1,6 +1,7 @@
 package ru.vetoshkin.core;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.postgresql.ds.PGPoolingDataSource;
 import ru.vetoshkin.util.PropertiesUtil;
 
 import javax.sql.DataSource;
@@ -24,13 +25,14 @@ public class HikariPool {
         Properties dbProperties = PropertiesUtil.loadProperties(propertiesLocation);
 
         HikariConfig configuration = new HikariConfig();
-        configuration.setJdbcUrl(dbProperties.getProperty("db.host"));
-        configuration.setUsername(dbProperties.getProperty("db.user"));
-        configuration.setPassword(dbProperties.getProperty("db.password"));
-        configuration.setCatalog(dbProperties.getProperty("db.catalog"));
-        configuration.setMaximumPoolSize(15);
-        configuration.setAutoCommit(true);
+        PGPoolingDataSource pg_source = new PGPoolingDataSource();
+        pg_source.setDatabaseName(dbProperties.getProperty("db.initialDb"));
+        pg_source.setServerName(dbProperties.getProperty("db.host"));
+        pg_source.setPortNumber(Integer.parseInt(dbProperties.getProperty("db.port")));
+        pg_source.setUser(dbProperties.getProperty("db.user"));
+        pg_source.setPassword(dbProperties.getProperty("db.password"));
 
+        configuration.setDataSource(pg_source);
         source = new HikariDataSource(configuration);
     }
 

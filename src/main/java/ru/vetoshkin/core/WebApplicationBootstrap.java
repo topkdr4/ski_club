@@ -27,8 +27,6 @@ public class WebApplicationBootstrap implements ServletContextListener {
         } catch (IOException e) {
             logger.warn("ERROR: ", e);
         }
-
-        logger.info("AFTER");
     }
 
 

@@ -3,9 +3,19 @@ package ru.vetoshkin.rest;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import ru.vetoshkin.bean.Trainer;
+import ru.vetoshkin.core.HikariPool;
+import ru.vetoshkin.core.SystemException;
+import ru.vetoshkin.service.TrainerService;
+import ru.vetoshkin.util.Jackson;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.List;
+
+
+
+
 
 @Path("/trainer")
 @Consumes("application/json")
@@ -18,33 +28,52 @@ public class TrainerRestService {
 
     @GET
     @Path("/list")
-    public Response getTrainerList() {
+    public SimpleResponse getTrainerList() throws SystemException {
         logger.debug("get trainer list");
-        return EMPTY;
+        SimpleResponse response = new SimpleResponse();
+        response.setResult(TrainerService.getAllTrainers());
+        return response;
     }
 
 
     @GET
-    @Path("/item/{id}")
-    public Response getTrainerInfo(@PathParam("id") String trainerId) {
-        logger.debug("get traiiner with id: " + trainerId);
-        return EMPTY;
+    @Path("/get")
+    public Trainer getTrainerInfo(IdentityRequest request) throws SystemException {
+        logger.debug("get trainer with id: " + request.getId());
+        return TrainerService.getTrainer(request.getId());
     }
 
 
     @DELETE
-    @Path("/item/{id}")
-    public Response removeTrainer(@PathParam("id") String trainerId) {
-        logger.debug("remove trainer with id: " + trainerId);
+    @Path("/remove")
+    public Response removeTrainer(IdentityRequest request) {
+        logger.debug("remove trainer with id: " + request.getId());
+        TrainerService.removeTrainer(request.getId());
         return EMPTY;
     }
 
 
+
     @PUT
-    @Path("/item/new")
-    public String addTrainer(Trainer trainer) {
-        logger.debug("add new trainer");
-        return trainer.getId();
+    @Path("/save")
+    public Trainer addTrainer(Trainer trainer) throws SystemException {
+        logger.debug("save trainer");
+        TrainerService.saveTrainer(trainer);
+        return trainer;
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        HikariPool.init();
+        String json = "{\"family\":\"Фамилия\",\"name\":\"Имя\",\"qualification\":\"ТОп\",\"dayOfBirth\":\"2018-01-24\",\"id\": null}";
+        Trainer trainer = Jackson.toObject(json);
+
+        System.out.println(trainer);
+        System.out.println(Jackson.toJson(trainer));
+        TrainerService.saveTrainer(trainer);
+        System.out.println(
+                trainer.getId()
+        );
     }
 
 }

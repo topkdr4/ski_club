@@ -17,20 +17,46 @@
     }
 
 
-    Application.send = function(url, data, callback) {
+    Application.put = function(url, data, callback) {
         $.ajax({
             url: url,
-            method: 'POST',
+            method: 'PUT',
             dataType: 'json',
             data: data,
-            success: function (data) {
-                callback(data);
-            },
+            success: callback,
             error: function (data) {
 
             }
         });
-    }
+    };
+
+
+    Application.get = function(url, data, callback) {
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            data: data,
+            success: callback,
+            error: function (data) {
+
+            }
+        });
+    };
+
+
+    Application.delete = function(url, data, callback) {
+        $.ajax({
+            url: url,
+            method: 'DELETE',
+            dataType: 'json',
+            data: data,
+            success: callback,
+            error: function (data) {
+
+            }
+        });
+    };
 
     window.Application = Application;
 })();
