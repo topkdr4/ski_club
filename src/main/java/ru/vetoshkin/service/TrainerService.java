@@ -1,10 +1,8 @@
 package ru.vetoshkin.service;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.postgresql.util.PGobject;
-import ru.vetoshkin.TrainerQualification;
 import ru.vetoshkin.bean.Trainer;
 import ru.vetoshkin.core.HikariPool;
 import ru.vetoshkin.core.SystemException;
@@ -13,7 +11,6 @@ import ru.vetoshkin.util.Jackson;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -29,10 +26,11 @@ public class TrainerService {
     }
 
 
-    public static int saveTrainer(Trainer trainer) throws SystemException {
+    public static void saveTrainer(Trainer trainer) throws SystemException {
         String method = "{? = call save_trainer(?)}";
+
         try (Connection connection = HikariPool.getSource().getConnection()) {
-            connection.setAutoCommit(false);
+            connection.setAutoCommit(true);
 
             CallableStatement statement = connection.prepareCall(method);
             statement.registerOutParameter(1, Types.INTEGER);
@@ -52,12 +50,15 @@ public class TrainerService {
         } catch (Exception e) {
             throw new SystemException(e);
         }
-
-        return trainer.getId();
     }
 
 
     public static void removeTrainer(int id) {
+        throw new UnsupportedOperationException("remove trainer not supported");
+    }
+
+
+    public static void removeTrainer(Trainer trainer) {
         throw new UnsupportedOperationException("remove trainer not supported");
     }
 
@@ -95,7 +96,7 @@ public class TrainerService {
         String method = "{? = call get_trainers()}";
 
         try (Connection connection = HikariPool.getSource().getConnection()) {
-            connection.setAutoCommit(false);
+            connection.setAutoCommit(true);
 
             CallableStatement statement = connection.prepareCall(method);
             statement.registerOutParameter(1, Types.OTHER);
@@ -126,10 +127,10 @@ public class TrainerService {
         trainer.setName(set.getString(3));
         trainer.setQualification(set.getString(4));
 
-        GregorianCalendar cal = new GregorianCalendar();
-        cal.setTime(set.getDate(5));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(set.getDate(5));
 
-        trainer.setDayOfBirth(new XMLGregorianCalendarImpl(cal));
+        trainer.setDayOfBirth(set.getDate(5));
 
         return trainer;
     }

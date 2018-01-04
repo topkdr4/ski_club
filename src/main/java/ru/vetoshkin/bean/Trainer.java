@@ -1,11 +1,7 @@
 package ru.vetoshkin.bean;
 
-import ru.vetoshkin.TrainerQualification;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.datatype.XMLGregorianCalendar;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -18,11 +14,9 @@ public class Trainer {
     private String family;
     private String name;
     private String qualification;
-    private XMLGregorianCalendar dayOfBirth;
+    private Date dayOfBirth;
     private Integer id;
-/*
-* "{family:"Фамилия","name":"Имя","qualification":"ТОп","dayOfBirth":"2018-01-24","id":null}"
-* */
+
 
     public Integer getId() {
         return id;
@@ -64,23 +58,13 @@ public class Trainer {
     }
 
 
-    public XMLGregorianCalendar getDayOfBirth() {
+    public Date getDayOfBirth() {
         return dayOfBirth;
     }
 
 
-    public void setDayOfBirth(XMLGregorianCalendar dayOfBirth) {
+    public void setDayOfBirth(Date dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
     }
 
-
-    @Override public String toString() {
-        return "Trainer{" +
-                "family='" + family + '\'' +
-                ", name='" + name + '\'' +
-                ", qualification='" + qualification + '\'' +
-                ", dayOfBirth=" + dayOfBirth +
-                ", id=" + id +
-                '}';
-    }
 }

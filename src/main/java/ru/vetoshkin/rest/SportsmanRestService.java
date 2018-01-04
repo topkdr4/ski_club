@@ -3,6 +3,7 @@ package ru.vetoshkin.rest;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import ru.vetoshkin.bean.Sportsman;
+import ru.vetoshkin.service.SportsmanService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -18,33 +19,37 @@ public class SportsmanRestService {
 
     @GET
     @Path("/list")
-    public Response getSportsmanList() {
+    public SimpleResponse getSportsmanList() {
         logger.debug("get sportsman list");
-        return EMPTY;
+        SimpleResponse response = new SimpleResponse();
+        response.setResult(SportsmanService.getAllSportsmans());
+        return response;
     }
 
 
     @GET
-    @Path("/item/{id}")
-    public Response getSportsman(@PathParam("id") String sportsmanId) {
-        logger.debug("get sportsman info with id: " + sportsmanId);
-        return EMPTY;
+    @Path("/get")
+    public Sportsman getSportsman(IdentityRequest request) {
+        logger.debug("get sportsman info with id: " + request.getId());
+        return SportsmanService.getSportsman(request.getId());
     }
 
 
     @DELETE
-    @Path("/item/{id}")
-    public Response removeSportsman(@PathParam("id") String sportsmanId) {
-        logger.debug("remove sportsman with id: " + sportsmanId);
+    @Path("/remove")
+    public Response removeSportsman(IdentityRequest request) {
+        logger.debug("remove sportsman with id: " + request.getId());
+        SportsmanService.removeSportsman(request.getId());
         return EMPTY;
     }
 
 
     @PUT
-    @Path("/item/new")
-    public Response addSportsman(Sportsman sportsman) {
-        logger.debug("add new sportsman");
-        return EMPTY;
+    @Path("/save")
+    public Sportsman addSportsman(Sportsman sportsman) {
+        logger.debug("save sportsman");
+        SportsmanService.saveSportsman(sportsman);
+        return sportsman;
     }
 
 

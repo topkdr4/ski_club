@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.vetoshkin.bean.Trainer;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 
@@ -18,10 +20,12 @@ import java.io.IOException;
 public class Jackson {
 
     private static final ObjectMapper jsonMapper = new ObjectMapper();
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     static {
         jsonMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         jsonMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+        jsonMapper.setDateFormat(dateFormat);
     }
 
 
