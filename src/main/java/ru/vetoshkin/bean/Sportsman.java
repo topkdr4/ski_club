@@ -25,7 +25,7 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Sportsman {
 
-    private String id;
+    private int id;
     private String family;
     private String name;
     private String qualification;
@@ -35,12 +35,12 @@ public class Sportsman {
     private int yearOfStart;
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
