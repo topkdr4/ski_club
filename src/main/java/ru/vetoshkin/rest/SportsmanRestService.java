@@ -3,6 +3,7 @@ package ru.vetoshkin.rest;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import ru.vetoshkin.bean.Sportsman;
+import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.service.SportsmanService;
 
 import javax.ws.rs.*;
@@ -19,7 +20,7 @@ public class SportsmanRestService {
 
     @GET
     @Path("/list")
-    public SimpleResponse getSportsmanList() {
+    public SimpleResponse getSportsmanList() throws SystemException {
         logger.debug("get sportsman list");
         SimpleResponse response = new SimpleResponse();
         response.setResult(SportsmanService.getAllSportsmans());
@@ -29,7 +30,7 @@ public class SportsmanRestService {
 
     @GET
     @Path("/get")
-    public Sportsman getSportsman(IdentityRequest request) {
+    public Sportsman getSportsman(IdentityRequest request) throws SystemException {
         logger.debug("get sportsman info with id: " + request.getId());
         return SportsmanService.getSportsman(request.getId());
     }
@@ -46,7 +47,7 @@ public class SportsmanRestService {
 
     @PUT
     @Path("/save")
-    public Sportsman addSportsman(Sportsman sportsman) {
+    public Sportsman addSportsman(Sportsman sportsman) throws SystemException {
         logger.debug("save sportsman");
         SportsmanService.saveSportsman(sportsman);
         return sportsman;

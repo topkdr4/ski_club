@@ -2,9 +2,11 @@ package ru.vetoshkin.service;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.postgresql.util.PGobject;
 import ru.vetoshkin.bean.Sportsman;
 import ru.vetoshkin.core.HikariPool;
 import ru.vetoshkin.core.SystemException;
+import ru.vetoshkin.util.Jackson;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,8 +25,30 @@ public class SportsmanService {
     }
 
 
-    public static void saveSportsman(Sportsman sportsman) {
-        throw new UnsupportedOperationException("save sportsman not supported");
+    public static void saveSportsman(Sportsman sportsman) throws SystemException {
+        String method = "{? = call save_sportsman(?)}";
+
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(true);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.INTEGER);
+
+            PGobject jsonObject = new PGobject();
+            jsonObject.setType("json");
+            jsonObject.setValue(Jackson.toJson(sportsman));
+
+            statement.setObject(2, jsonObject);
+
+            logger.info(method);
+            statement.execute();
+
+            int id = statement.getInt(1);
+            sportsman.setId(id);
+
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
     }
 
 

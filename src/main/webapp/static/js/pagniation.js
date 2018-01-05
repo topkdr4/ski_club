@@ -28,7 +28,7 @@
 
     Pagination.prototype.getElements = function(page) {
         if (page == 0 || page > this.__pages)
-            throw new Error("ArrayIndexBoundException");
+            throw new Error("ArrayIndexOFBoundException");
 
         var result = [];
 
@@ -55,8 +55,6 @@
 
         return result;
     };
-
-
 
 
     window.Pagination = Pagination;

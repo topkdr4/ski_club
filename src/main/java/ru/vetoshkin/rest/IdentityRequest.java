@@ -1,6 +1,5 @@
 package ru.vetoshkin.rest;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 
@@ -9,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Ветошкин А.В. РИС-16бзу
  * */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class IdentityRequest {
 
     private int id;

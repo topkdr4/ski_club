@@ -8,6 +8,7 @@ import ru.vetoshkin.core.HikariPool;
 import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.util.Jackson;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +51,55 @@ public class TrainerService {
         } catch (Exception e) {
             throw new SystemException(e);
         }
+    }
+
+
+    public static int getAllTrainersCount() throws SystemException {
+        String method = "{? = call get_trainers_count()}";
+
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(true);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.INTEGER);
+
+            logger.info(method);
+            statement.execute();
+
+            return statement.getInt(1);
+
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+    }
+
+
+    public static List<Trainer> getTrainers(int from, int to) throws SystemException {
+        String method = "{? = call get_trainers_page(?, ?)}";
+        List<Trainer> result = new ArrayList<>();
+
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(false);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.OTHER);
+            statement.setInt(2, from);
+            statement.setInt(3, to);
+
+            logger.info(method);
+            statement.execute();
+
+            ResultSet set = (ResultSet) statement.getObject(1);
+            while (set.next()) {
+                result.add(create(set));
+            }
+
+            set.close();
+        } catch (SQLException e) {
+            throw new SystemException(e);
+        }
+
+        return result;
     }
 
 
@@ -126,10 +176,6 @@ public class TrainerService {
         trainer.setFamily(set.getString(2));
         trainer.setName(set.getString(3));
         trainer.setQualification(set.getString(4));
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(set.getDate(5));
-
         trainer.setDayOfBirth(set.getDate(5));
 
         return trainer;

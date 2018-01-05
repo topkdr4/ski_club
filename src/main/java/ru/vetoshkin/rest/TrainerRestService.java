@@ -7,6 +7,7 @@ import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.service.TrainerService;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
@@ -14,8 +15,8 @@ import javax.ws.rs.core.Response;
 
 
 @Path("/trainer")
-@Consumes("application/json")
-@Produces("application/json")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class TrainerRestService {
 
     private static final Logger logger = LogManager.getLogger(TrainerRestService.class);
@@ -33,8 +34,29 @@ public class TrainerRestService {
 
 
     @GET
+    @Path("/list/{from}/{to}")
+    public SimpleResponse getTrainerListRange(@PathParam("from") int from, @PathParam("to") int to) throws SystemException {
+        logger.debug("get trainer list range");
+        SimpleResponse response = new SimpleResponse();
+        response.setResult(TrainerService.getTrainers(from, to));
+        return response;
+    }
+
+
+    @GET
+    @Path("/list/count")
+    public SimpleResponse getTrainersCount() throws SystemException {
+        logger.debug("get trainers count");
+        SimpleResponse response = new SimpleResponse();
+        response.setResult(TrainerService.getAllTrainersCount());
+        return response;
+    }
+
+
+    @GET
     @Path("/get")
     public Trainer getTrainerInfo(IdentityRequest request) throws SystemException {
+        logger.info(request == null);
         logger.debug("get trainer with id: " + request.getId());
         return TrainerService.getTrainer(request.getId());
     }
