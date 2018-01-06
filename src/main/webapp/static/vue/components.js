@@ -24,3 +24,27 @@ Vue.component('sportsman-cards', {
     '        </div>\n' +
     '    </div>'
 });
+
+Vue.component('trainer-cards', {
+    props: [ 'trainer' ],
+    template: '<div class="col s4">\n' +
+    '                <div class="card hoverable">\n' +
+    '                    <div class="trainer">\n' +
+    '                        <div class="trainer-info">\n' +
+    '                            <div class="trainer-info-item">\n' +
+    '                                <span>{{trainer.family}}</span>\n' +
+    '                            </div>\n' +
+    '                            <div class="trainer-info-item">\n' +
+    '                                <span>{{trainer.name}}</span>\n' +
+    '                            </div>\n' +
+    '                            <div class="trainer-info-item">\n' +
+    '                                <span>{{trainer.dayOfBirth}}</span>\n' +
+    '                            </div>\n' +
+    '                            <div class="trainer-info-item">\n' +
+    '                                <span>{{trainer.qualification}}</span>\n' +
+    '                            </div>\n' +
+    '                        </div>\n' +
+    '                    </div>\n' +
+    '                </div>\n' +
+    '            </div>'
+});

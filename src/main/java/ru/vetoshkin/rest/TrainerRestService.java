@@ -7,16 +7,18 @@ import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.service.TrainerService;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 
 
 
 
 @Path("/trainer")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes({ APPLICATION_JSON, APPLICATION_FORM_URLENCODED })
+@Produces(APPLICATION_JSON)
 public class TrainerRestService {
 
     private static final Logger logger = LogManager.getLogger(TrainerRestService.class);
@@ -54,19 +56,18 @@ public class TrainerRestService {
 
 
     @GET
-    @Path("/get")
-    public Trainer getTrainerInfo(IdentityRequest request) throws SystemException {
-        logger.info(request == null);
-        logger.debug("get trainer with id: " + request.getId());
-        return TrainerService.getTrainer(request.getId());
+    @Path("/get/{id}")
+    public Trainer getTrainerInfo(@PathParam("id") int id) throws SystemException {
+        logger.debug("get trainer with id: " + id);
+        return TrainerService.getTrainer(id);
     }
 
 
     @DELETE
-    @Path("/remove")
-    public Response removeTrainer(IdentityRequest request) {
-        logger.debug("remove trainer with id: " + request.getId());
-        TrainerService.removeTrainer(request.getId());
+    @Path("/remove/{id}")
+    public Response removeTrainer(@PathParam("id") int id) {
+        logger.debug("remove trainer with id: " + id);
+        TrainerService.removeTrainer(id);
         return EMPTY;
     }
 

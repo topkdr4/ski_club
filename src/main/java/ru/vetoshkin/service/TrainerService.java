@@ -128,7 +128,7 @@ public class TrainerService {
             statement.execute();
 
             ResultSet set = (ResultSet) statement.getObject(1);
-            if (set.first()) {
+            if (set.next()) {
                 trainer = create(set);
             }
 

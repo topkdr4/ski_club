@@ -43,4 +43,9 @@ public class Jackson {
         return jsonMapper.readValue(json, Trainer.class);
     }
 
+
+    public static ObjectMapper getJsonMapper() {
+        return jsonMapper;
+    }
+
 }

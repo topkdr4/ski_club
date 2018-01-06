@@ -27,14 +27,23 @@
 
 
     Trainer.getTrainerInfo = function(trainerId) {
-        Application.get("/trainer/get", {id: trainerId}, function(data) {
+        Application.get("/trainer/get/" + trainerId, {id: trainerId}, function(data) {
+            console.log(data);
+        });
+    };
+
+
+    Trainer.removeTrainer = function(trainerId) {
+        Application.remove("/trainer/remove/" + trainerId, {id: trainerId}, function(data) {
             console.log(data);
         });
     };
 
 
     Trainer.saveTrainer = function(trainer) {
-
+        Application.put("/trainer/save", trainer, function(data) {
+            console.log(data);
+        });
     };
 
 

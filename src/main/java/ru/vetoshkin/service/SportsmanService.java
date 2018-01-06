@@ -72,7 +72,7 @@ public class SportsmanService {
             statement.execute();
 
             ResultSet set = (ResultSet) statement.getObject(1);
-            if (set.first()) {
+            if (set.next()) {
                 sportsman = createSportsman(set);
             }
 

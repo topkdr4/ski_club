@@ -5,6 +5,7 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="../static/css/others.css">
+    <link type="text/css" rel="stylesheet" href="../static/css/style.css">
     <link type="text/css" rel="stylesheet" href="../static/lib/materialize/css/materialize.min.css" media="screen,projection"/>
 
     <title>Тренерский состав</title>
@@ -24,7 +25,7 @@
         <ul class="collapsible" data-collapsible="accordion" style="user-select: none">
             <li>
                 <div class="collapsible-header">
-                    <i class="material-icons">filter_drama</i>Рекорды
+                    <i class="material-icons">timeline</i>Рекорды
                 </div>
 
                 <ul class="collection collapsible-body">
@@ -36,7 +37,7 @@
             </li>
             <li>
                 <div class="collapsible-header">
-                    <i class="material-icons">filter_drama</i>Соревнования
+                    <i class="material-icons">casino</i>Соревнования
                 </div>
                 <ul class="collection collapsible-body">
                     <li class="collection-item avatar valign-wrapper">
@@ -93,43 +94,20 @@
     <div class="col s10">
         <div class="row" id="trainer-list">
 
-            <div class="col s12">
-                <div class="input-field">
-                    <input id="search-trainer" type="search" required style="text-indent: 50px;">
-                    <label class="label-icon" for="search-trainer"><i class="material-icons">search</i></label>
-                </div>
-            </div>
+            <trainer-cards
+                    v-for="(item, index) in trainers"
+                    v-bind:trainer="item"
+            ></trainer-cards>
 
-            <div class="col s4">
-                <div class="card hoverable">
-                    <div class="trainer">
-                        <div class="trainer-info">
-                            <div class="trainer-info-item">
-                                <span>{{trainer.family}}</span>
-                            </div>
-                            <div class="trainer-info-item">
-                                <span>{{trainer.name}}</span>
-                            </div>
-                            <div class="trainer-info-item">
-                                <span>{{trainer.startedFrom}}</span>
-                            </div>
-                            <div class="trainer-info-item">
-                                <span>Инструктор, инструктор-методист среднего уровня квалификации первой категории</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12" id="paggins">
+            <div class="col s12 trainer_pagination" id="paggins">
                 <ul class="pagination">
-                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                    <li class="active teal"><a href="#!">1</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!">2</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!">3</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!">4</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!">5</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                    <li class="disabled"><a href="#trainer-page-back"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active teal"><a href="#trainer-page-1">1</a></li>
+                    <li class="waves-effect waves-teal"><a href="#trainer-page-2">2</a></li>
+                    <li class="waves-effect waves-teal"><a href="#trainer-page-3">3</a></li>
+                    <li class="waves-effect waves-teal"><a href="#trainer-page-4">4</a></li>
+                    <li class="waves-effect waves-teal"><a href="#trainer-page-5">5</a></li>
+                    <li class="waves-effect waves-teal"><a href="#trainer-page-next"><i class="material-icons">chevron_right</i></a></li>
                 </ul>
             </div>
 
@@ -142,10 +120,42 @@
 <script type="text/javascript" src="../static/js/jquery.js"></script>
 <script type="text/javascript" src="../static/lib/materialize/js/materialize.min.js"></script>
 <script type="text/javascript" src="../static/js/vue.js"></script>
-<script type="text/javascript" src="../static/vue/sportsman-card.js"></script>
+<script type="text/javascript" src="../static/vue/components.js"></script>
 <script type="text/javascript" src="../static/js/pagniation.js"></script>
 <script type="text/javascript" src="../static/js/app.js"></script>
 <script type="text/javascript" src="../static/js/trainer.js"></script>
+
+
+<script type="text/javascript">
+
+    var pagination = new Pagination($('.trainer_pagination'), {
+        count:   '/trainer/list/count',
+        content: '/trainer/list/'
+    }, 'trainer');
+
+    pagination.initialize();
+
+
+    var trainers = [{
+        family: 'Фамилия',
+        name: 'Имя',
+        dayOfBirth: '24-01-218',
+        qualification: 'Наивысшая'
+    }, {
+        family: 'Фамилия2',
+        name: 'Имя2',
+        dayOfBirth: '24-01-218',
+        qualification: 'Наивысшая 23'
+    }];
+
+    var apps = new Vue({
+        el: '#trainer-list',
+        data: {
+            trainers: trainers
+        }
+    });
+
+</script>
 
 
 </body>
