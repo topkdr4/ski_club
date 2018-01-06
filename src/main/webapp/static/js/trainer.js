@@ -16,6 +16,11 @@
         el: '#trainer-list',
         data: {
             trainers: []
+        },
+        methods: {
+            getTrainerInfo: function(event){
+                console.log(event);
+            }
         }
     });
 
@@ -26,6 +31,7 @@
         array.forEach(function(item) {
             var tmpDate = new Date(item.dayOfBirth);
             temp.push({
+                id: item.id,
                 family: item.family,
                 name: item.name,
                 qualification: item.qualification,

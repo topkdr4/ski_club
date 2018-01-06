@@ -27,7 +27,7 @@ Vue.component('sportsman-cards', {
 
 Vue.component('trainer-cards', {
     props: [ 'trainer' ],
-    template: '<div class="col s4">\n' +
+    template: '<div class="col s4" @click.native="getTrainerInfo">' +
     '                <div class="card hoverable">\n' +
     '                    <div class="trainer">\n' +
     '                        <div class="trainer-info">\n' +
