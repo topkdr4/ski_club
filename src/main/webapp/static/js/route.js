@@ -23,7 +23,6 @@
         for (var i = 0; i < routes.length; i++) {
             var route = routes[i];
             var match = route.regexp.exec(path);
-            console.log(match)
             if (match != null) {
                 match[0] = path;
                 route.handler.apply(null, match);
@@ -51,7 +50,6 @@
 
     function routeHash(e) {
         var path = location.hash.replace(/^#+/, '');
-        console.log('path:', path);
         route(path);
     }
 

@@ -6,23 +6,45 @@
     function Trainer () {}
 
 
-    Trainer.getTrainers = function(page) {
+    Trainer.getTrainers = function(page, callback) {
         var range = getRange(page);
-        Application.get("/trainer/list/" + range.from + '/' + range.to, {}, function(data) {
-            console.log(data);
+        Application.get("/trainer/list/" + range.from + '/' + range.to, {}, callback);
+    };
+
+
+    Trainer.trainersList = new Vue({
+        el: '#trainer-list',
+        data: {
+            trainers: []
+        }
+    });
+
+
+    Trainer.setContent = function(data) {
+        var array = data.result;
+        var temp = [];
+        array.forEach(function(item) {
+            var tmpDate = new Date(item.dayOfBirth);
+            temp.push({
+                family: item.family,
+                name: item.name,
+                qualification: item.qualification,
+                dayOfBirth: tmpDate.toLocaleDateString()
+            });
         });
+
+        Trainer.trainersList.trainers = temp;
     };
 
 
     Trainer.home = function() {
-        Application.get("/trainer/list/count", {}, function(data) {
-            var allItems = data.result;
-            var allPages = Math.floor(allItems / itemsPerPage) + 1;
-            //TODO: Пагинация
-            console.log('all items: ' + allItems);
-            console.log('all pages: ' + allPages);
-            Trainer.getTrainers(1);
-        });
+        var pagination = new Pagination($('.trainer_pagination'), {
+            count:   '/trainer/list/count',
+            content: '/trainer/list/'
+        }, 'trainer');
+
+        pagination.initialize();
+        Trainer.getTrainers(1, Trainer.setContent);
     };
 
 

@@ -125,7 +125,7 @@
         });
 
         that.toObject.append(that.rootElement);
-        console.log(__pages);
+        $('.active.teal > a')[0].click();
     };
 
 
@@ -171,17 +171,6 @@
         link.appendTo(result);
 
         return result;
-    }
-
-
-    function getRange(page) {
-        var max = page * ITEMS_PER_PAGE;
-
-        var result = {};
-        result.to = max + 1;
-        result.from = max - ITEMS_PER_PAGE;
-
-        return result
     }
 
 
