@@ -136,6 +136,11 @@
         var page = arg.split('-')[2];
         Trainer.getTrainers(page, Trainer.setContent);
     });
+
+    Router.watch(/^trainer-info/, function(arg) {
+        var id = arg.split('-')[2];
+        Trainer.getTrainerInfo(id);
+    });
 </script>
 
 

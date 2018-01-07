@@ -27,7 +27,7 @@ Vue.component('sportsman-cards', {
 
 Vue.component('trainer-cards', {
     props: [ 'trainer' ],
-    template: '<div class="col s4" @click.native="getTrainerInfo">' +
+    template: '<div class="col s4" @click="getTrainerInfo">' +
     '                <div class="card hoverable">\n' +
     '                    <div class="trainer">\n' +
     '                        <div class="trainer-info">\n' +
@@ -46,5 +46,10 @@ Vue.component('trainer-cards', {
     '                        </div>\n' +
     '                    </div>\n' +
     '                </div>\n' +
-    '            </div>'
+    '            </div>',
+    methods: {
+        getTrainerInfo: function() {
+            window.location.hash = '#trainer-info-'+this.trainer.id;
+        }
+    }
 });

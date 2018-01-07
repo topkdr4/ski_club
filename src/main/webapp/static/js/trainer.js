@@ -16,11 +16,6 @@
         el: '#trainer-list',
         data: {
             trainers: []
-        },
-        methods: {
-            getTrainerInfo: function(event){
-                console.log(event);
-            }
         }
     });
 
@@ -51,6 +46,7 @@
 
         pagination.initialize();
         Trainer.getTrainers(1, Trainer.setContent);
+        return pagination;
     };
 
 
