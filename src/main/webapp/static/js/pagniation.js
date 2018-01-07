@@ -45,11 +45,12 @@
             if ($(this).hasClass('disabled'))
                 return;
 
-            if (instance.currentPage - 1 === 1)
+            if (instance.currentPage - 1 == 1)
                 $(this).addClass('disabled');
 
             instance.controllers.next.removeClass('disabled');
             instance.setPage(instance.currentPage - 1);
+            window.location.hash = '#' + instance.prefix + '-page-' + (instance.currentPage - 1)
         });
     }
 
@@ -59,7 +60,7 @@
             if ($(this).hasClass('disabled'))
                 return;
 
-            if (instance.currentPage + 1 === instance.elements.pages)
+            if (instance.currentPage + 1 == instance.elements.pages)
                 $(this).addClass('disabled');
 
             instance.controllers.back.removeClass('disabled');
@@ -79,7 +80,7 @@
 
         var back = that.controllers.back;
 
-        if (pageNumber === 1) {
+        if (pageNumber == 1) {
             back.addClass('disabled');
             back.removeClass('waves-effect waves-teal');
         } else {
@@ -104,14 +105,14 @@
 
         for (var i = range.from; i < range.to; i++) {
             var button = createPageButton(that.prefix, i + 1);
-            if (i + 1 === pageNumber)
+            if (i + 1 == pageNumber)
                 button.addClass('active teal');
 
             __pages.push(button);
         }
 
         var next = that.controllers.next;
-        if (pageNumber === that.elements.pages) {
+        if (pageNumber == that.elements.pages) {
             next.addClass('disabled');
             next.removeClass('waves-effect waves-teal');
         } else {
@@ -125,7 +126,6 @@
         });
 
         that.toObject.append(that.rootElement);
-        $('.active.teal > a')[0].click();
     };
 
 

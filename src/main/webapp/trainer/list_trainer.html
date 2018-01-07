@@ -18,7 +18,7 @@
     </div>
 </nav>
 
-<div class="row">
+<div class="row" id="#rootElement">
 
     <div class="col s2">
 
@@ -91,14 +91,20 @@
 
     </div>
 
-    <div class="col s10">
+    <div class="col s10" id="app-content">
         <div class="row" id="trainer-list">
 
             <trainer-cards
                     v-for="(item, index) in trainers"
                     v-bind:trainer="item"
                     v-bind:key="item.id"
+                    v-if="showed"
             ></trainer-cards>
+
+            <trainer-info
+                    v-if="showInfo"
+                    v-bind:trainer="trainer"
+            ></trainer-info>
 
         </div>
 
@@ -131,16 +137,8 @@
 
 
 <script type="text/javascript">
-    Trainer.home();
-    Router.watch(/^trainer-page/, function(arg) {
-        var page = arg.split('-')[2];
-        Trainer.getTrainers(page, Trainer.setContent);
-    });
+    Trainer.initialization();
 
-    Router.watch(/^trainer-info/, function(arg) {
-        var id = arg.split('-')[2];
-        Trainer.getTrainerInfo(id);
-    });
 </script>
 
 
