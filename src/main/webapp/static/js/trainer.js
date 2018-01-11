@@ -88,7 +88,7 @@
             Trainer.trainersList.showed = true;
             Trainer.trainersList.showInfo = false;
 
-            var page = arg.split('-')[2];
+            var page = +arg.split('-')[2];
             if (!$("div").is("#trainer-list")) {
                 var rowContent = $('<div/>', {
                     class: 'row',
@@ -145,7 +145,6 @@
         var result = {};
         result.to = max + 1;
         result.from = max - itemsPerPage;
-
         return result
     }
 

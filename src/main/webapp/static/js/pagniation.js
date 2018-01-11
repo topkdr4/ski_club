@@ -50,7 +50,7 @@
 
             instance.controllers.next.removeClass('disabled');
             instance.setPage(instance.currentPage - 1);
-            window.location.hash = '#' + instance.prefix + '-page-' + (instance.currentPage - 1)
+            window.location.hash = '#' + instance.prefix + '-page-' + (instance.currentPage );
         });
     }
 
@@ -60,11 +60,12 @@
             if ($(this).hasClass('disabled'))
                 return;
 
-            if (instance.currentPage + 1 == instance.elements.pages)
+            if (instance.currentPage + 1 >= instance.elements.pages)
                 $(this).addClass('disabled');
 
             instance.controllers.back.removeClass('disabled');
-            instance.setPage(instance.currentPage + 1);
+            instance.setPage(+(instance.currentPage+1));
+            window.location.hash = '#' + instance.prefix + '-page-' + instance.currentPage;
         });
     }
 
