@@ -1,6 +1,7 @@
 package ru.vetoshkin.core;
 
 import org.apache.log4j.Logger;
+import ru.vetoshkin.util.PageService;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -24,6 +25,7 @@ public class WebApplicationBootstrap implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         try {
             HikariPool.init();
+            PageService.init();
         } catch (IOException e) {
             logger.warn("ERROR: ", e);
         }

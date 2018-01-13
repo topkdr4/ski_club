@@ -72,7 +72,6 @@ Vue.component('trainer-info', {
     '                        </div>\n' +
     '                        <div class="input-field col s12">\n' +
     '                            <select v-model="trainer.qualification">\n' +
-    '                                <option value="" disabled>Квалификация</option>\n' +
     '                                <option value="1" data-icon="/static/icons/awards/award_star_gold_1.png"  class="left circle">Тренер-преподаватель высшего уровня квалификации высшей категории</option>\n' +
     '                                <option value="2" data-icon="/static/icons/awards/medal_gold_1.png"       class="left circle">Тренер-преподаватель высшего уровня квалификации первой категории</option>\n' +
     '                                <option value="3" data-icon="/static/icons/awards/medal_silver_1.png"     class="left circle">Тренер-преподаватель высшего уровня квалификации второй категории</option>\n' +
@@ -101,7 +100,7 @@ Vue.component('trainer-info', {
     '                                <a class="waves-effect waves-light btn-large red darken-2" @click="remove">Удалить</a>\n' +
     '                            </p>\n' +
     '                        </div>\n' +
-    '                        <div class="col s12">\n' +
+    '                        <div class="col s12" v-if="trainer.id">\n' +
     '                            <p>\n' +
     '                                <a :href="href">К списку тренеров</a>\n' +
     '                            </p>\n' +
@@ -115,7 +114,14 @@ Vue.component('trainer-info', {
         save: function() {
             this.trainer.qualification = $('.select-dropdown').val();
             this.trainer.dayOfBirth = $('.datepicker').pickadate('picker').get('select').pick;
-            Trainer.saveTrainer(Trainer.trainersList.trainer)
+            if (Trainer.trainersList) {
+                Trainer.saveTrainer(Trainer.trainersList.trainer);
+            } else {
+                this.trainer.id = null;
+                Trainer.saveTrainer(this.trainer, function () {
+                    window.location = '?action=trainer-list'
+                });
+            }
         },
         remove: function() {
             $('.trainer-confirm-name').html('Тренер «' + (this.trainer.family) + '» <b>удален</b>. Продолжить?');

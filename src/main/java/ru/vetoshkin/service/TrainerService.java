@@ -45,9 +45,6 @@ public class TrainerService {
             logger.info(method);
             statement.execute();
 
-            int id = statement.getInt(1);
-            trainer.setId(id);
-
         } catch (Exception e) {
             throw new SystemException(e);
         }

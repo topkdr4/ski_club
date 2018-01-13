@@ -12,17 +12,6 @@
     };
 
 
-    Trainer.trainersList = new Vue({
-        el: '#trainer-list',
-        data: {
-            trainers: [],
-            showed: true,
-            showInfo: false,
-            trainer: null
-        }
-    });
-
-
     Trainer.setContent = function(data) {
         var array = data.result;
         var temp = [];
@@ -68,14 +57,30 @@
     };
 
 
-    Trainer.saveTrainer = function(trainer) {
+    Trainer.saveTrainer = function(trainer, callback) {
         Application.put("/trainer/save", trainer, function(data) {
-            $('#saveTrainer').modal('open');
+            if (callback) {
+                callback()
+            } else {
+                $('#saveTrainer').modal('open');
+            }
         });
     };
 
 
     Trainer.initialization = function() {
+        Trainer.trainersList = new Vue({
+            el: '#trainer-list',
+            data: {
+                trainers: [],
+                showed: true,
+                showInfo: false,
+                trainer: null,
+                root: '?action=trainer-list',
+                hash: '#trainer-page-'
+            }
+        });
+
         $('.modal').modal();
         var pagination = Trainer.home(1);
         Trainer.page = 1;
@@ -132,6 +137,22 @@
                 });
 
             });
+        });
+    };
+
+
+    Trainer.basicInit = function () {
+        $(document).ready(function() {
+            $('.modal').modal();
+            var $input = $('.datepicker').pickadate({
+                selectMonths: true,
+                selectYears: 30,
+                today: 'Сегодня',
+                clear: 'Отчистить',
+                close: 'Ok',
+                closeOnSelect: false
+            });
+            $('select').material_select();
         });
     };
 
