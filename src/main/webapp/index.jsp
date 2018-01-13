@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
 
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
     <title>Летающий лыжник</title>
 
@@ -84,7 +84,7 @@
                 </div>
                 <ul class="collection collapsible-body">
                     <li class="collection-item avatar valign-wrapper">
-                        <i class="material-icons circle orange darken-2">format_list_bulleted</i>Список
+                        <i class="material-icons circle orange darken-2">format_list_bulleted</i><a href="?action=sportsman-list">Список</a>
                     </li>
                     <li class="collection-item avatar valign-wrapper">
                         <i class="material-icons circle orange darken-2">group_add</i>Новый участник

@@ -14,7 +14,7 @@ Vue.component('sportsman-cards', {
     '                        <span>{{sportsman.ages}}</span>\n' +
     '                    </div>\n' +
     '                    <div class="person-info-item">\n' +
-    '                        <span>Состоит в клубе с: {{sportsman.startedFrom}}</span>\n' +
+    '                        <span>Состоит в клубе с: {{sportsman.yearOfStart}}г.</span>\n' +
     '                    </div>\n' +
     '                    <div class="person-info-item">\n' +
     '                        <span>Квалификация: {{sportsman.qualification}}</span>\n' +

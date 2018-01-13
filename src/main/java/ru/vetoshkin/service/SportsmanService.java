@@ -4,6 +4,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.postgresql.util.PGobject;
 import ru.vetoshkin.bean.Sportsman;
+import ru.vetoshkin.bean.Trainer;
 import ru.vetoshkin.core.HikariPool;
 import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.util.Jackson;
@@ -126,5 +127,54 @@ public class SportsmanService {
         result.setQualification(set.getString(8));
 
         return result;
+    }
+
+
+    public static List<Sportsman> getSportsmans(int from, int to) throws SystemException {
+        String method = "{? = call get_sportsmans_page(?, ?)}";
+        List<Sportsman> result = new ArrayList<>();
+
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(false);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.OTHER);
+            statement.setInt(2, from);
+            statement.setInt(3, to);
+
+            logger.info(method);
+            statement.execute();
+
+            ResultSet set = (ResultSet) statement.getObject(1);
+            while (set.next()) {
+                result.add(createSportsman(set));
+            }
+
+            set.close();
+        } catch (SQLException e) {
+            throw new SystemException(e);
+        }
+
+        return result;
+    }
+
+
+    public static int getAllSportsmansCount() throws SystemException {
+        String method = "{? = call get_sportsmans_count()}";
+
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(true);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.INTEGER);
+
+            logger.info(method);
+            statement.execute();
+
+            return statement.getInt(1);
+
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
     }
 }

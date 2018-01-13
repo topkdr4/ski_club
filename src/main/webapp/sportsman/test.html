@@ -93,29 +93,11 @@
     <div class="col s10">
         <div class="row" id="sportsman-list">
 
-            <div class="col s12">
-                <div class="input-field">
-                    <input id="search" type="search" required style="text-indent: 50px;">
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                </div>
-            </div>
-
             <sportsman-cards
                     v-for="(item, index) in sportsmans"
                     v-bind:sportsman="item"
             ></sportsman-cards>
 
-            <div class="col s12" id="paggins">
-                <ul class="pagination">
-                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                    <li class="active teal"><a href="#!">1</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!">2</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!">3</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!">4</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!">5</a></li>
-                    <li class="waves-effect waves-teal"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
-            </div>
 
         </div>
     </div>
@@ -158,26 +140,6 @@
             sportsmans: sportsss
         }
     });
-
-
-    new Vue({
-        el: '#paggins',
-        data: {
-        },
-        methods: {
-            changePage: function(event) {
-                console.log(event);
-            }
-        }
-    });
-
-    var hover = new Vue({
-        el: '.hover',
-        data: {
-            show: false
-        }
-    });
-
 
 </script>
 
