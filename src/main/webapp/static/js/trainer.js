@@ -18,13 +18,7 @@
             trainers: [],
             showed: true,
             showInfo: false,
-            trainer: {
-                /*family: '',
-                id: null,
-                name: '',
-                qualification: '',
-                dayOfBirth: 0*/
-            }
+            trainer: null
         }
     });
 
@@ -69,12 +63,16 @@
 
     Trainer.removeTrainer = function(trainerId) {
         Application.remove("/trainer/remove/" + trainerId, {id: trainerId}, function(data) {
-            console.log(data);
+            window.location.hash = '#trainer-page-' + Trainer.page;
         });
     };
 
 
     Trainer.saveTrainer = function(trainer) {
+        console.log(trainer);
+        if (true)
+            return;
+
         Application.put("/trainer/save", trainer, function(data) {
             console.log(data);
         });
@@ -82,7 +80,9 @@
 
 
     Trainer.initialization = function() {
+        $('.modal').modal();
         var pagination = Trainer.home(1);
+        Trainer.page = 1;
         Router.watch(/^trainer-page/, function(arg) {
             $('.pagination').show();
             Trainer.trainersList.showed = true;
@@ -107,6 +107,7 @@
 
             Trainer.getTrainers(page, Trainer.setContent);
             pagination.setPage(page);
+            Trainer.page = page;
         });
 
 
@@ -148,6 +149,17 @@
         return result
     }
 
+
+
+
+    $('.trainer-confirm-remove').on('click', function() {
+       var id = $(this).attr('data-trainer-id');
+       Trainer.removeTrainer(id);
+    });
+
+    $('.trainer-save-confirm').on('click', function() {
+        Trainer.saveTrainer(Trainer.trainersList.trainer);
+    });
 
     window.Trainer = Trainer;
 

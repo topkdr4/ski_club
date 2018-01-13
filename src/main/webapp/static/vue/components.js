@@ -62,7 +62,7 @@ Vue.component('trainer-info', {
     '                <div class="col s12 card">\n' +
     '                    <div class="row">\n' +
     '                        <div class="input-field col s4">\n' +
-    '                            <input id="family" placeholder="Фамилия" type="text" class="validate" :value="trainer.family">\n' +
+    '                            <input id="family" placeholder="Фамилия" type="text" class="validate" :bind:value="trainer.family">\n' +
     '                        </div>\n' +
     '                        <div class="input-field col s4">\n' +
     '                            <input id="name" placeholder="Имя" type="text" class="validate" :value="trainer.name">\n' +
@@ -93,11 +93,40 @@ Vue.component('trainer-info', {
     '                        </div>\n' +
     '                        <div class="col s3">\n' +
     '                            <p>\n' +
-    '                                <a class="waves-effect waves-light btn-large teal darken-2">Сохранить</a>\n' +
+    '                                <a class="waves-effect waves-light btn-large teal darken-2" @click="save">Сохранить</a>\n' +
+    '                            </p>\n' +
+    '                        </div>\n' +
+    '                        <div v-show="trainer.id != null" class="col s3">\n' +
+    '                            <p>\n' +
+    '                                <a class="waves-effect waves-light btn-large red darken-2" @click="remove">Удалить</a>\n' +
+    '                            </p>\n' +
+    '                        </div>\n' +
+    '                        <div class="col s12">\n' +
+    '                            <p>\n' +
+    '                                <a :href="href">К списку тренеров</a>\n' +
     '                            </p>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '            </div>\n' +
-    '        </div>'
+    '        </div>',
+
+    methods: {
+        save: function() {
+            console.log(this);
+            $('#saveTrainer').modal('open');
+        },
+        remove: function() {
+            $('.trainer-confirm-name').text('Тренер «' + (this.trainer.family) + '» <b>удален</b>. Продолжить?');
+            $('.trainer-confirm-remove').attr(
+                'data-trainer-id', this.trainer.id
+            );
+            $('#removeTrainer').modal('open');
+        }
+    },
+    computed: {
+        href: function() {
+            return '#trainer-page-' + Trainer.page;
+        }
+    }
 });

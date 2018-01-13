@@ -123,22 +123,42 @@
         </div>
     </div>
 
+    <!-- Удаление тренера -->
+    <div id="removeTrainer" class="modal">
+        <div class="modal-content">
+            <h4>Внимание!</h4>
+            <p class="trainer-confirm-name">Вы действительно желаете <b>удалить</b> тренера</p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-red btn-flat trainer-confirm-remove" data-trainer-id="0">Удалить</a>
+        </div>
+    </div>
+
+    <!-- Сохранение тренера -->
+    <div id="saveTrainer" class="modal">
+        <div class="modal-content">
+            <h4>Внимание!</h4>
+            <p class="trainer-save-confirm-name">Вы действительно желаете удалить тренера</p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat trainer-save-confirm" data-trainer-id>Сохранить</a>
+        </div>
+    </div>
 
 </div>
 
 <script type="text/javascript" src="../static/js/jquery.js"></script>
 <script type="text/javascript" src="../static/lib/materialize/js/materialize.min.js"></script>
 <script type="text/javascript" src="../static/js/vue.js"></script>
-<script type="text/javascript" src="../static/vue/components.js"></script>
 <script type="text/javascript" src="../static/js/route.js"></script>
 <script type="text/javascript" src="../static/js/pagniation.js"></script>
 <script type="text/javascript" src="../static/js/app.js"></script>
 <script type="text/javascript" src="../static/js/trainer.js"></script>
+<script type="text/javascript" src="../static/vue/components.js"></script>
 
 
 <script type="text/javascript">
     Trainer.initialization();
-
 </script>
 
 
