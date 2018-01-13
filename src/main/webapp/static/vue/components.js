@@ -62,16 +62,16 @@ Vue.component('trainer-info', {
     '                <div class="col s12 card">\n' +
     '                    <div class="row">\n' +
     '                        <div class="input-field col s4">\n' +
-    '                            <input id="family" placeholder="Фамилия" type="text" class="validate" :bind:value="trainer.family">\n' +
+    '                            <input id="family" placeholder="Фамилия" type="text" class="validate" v-model="trainer.family">\n' +
     '                        </div>\n' +
     '                        <div class="input-field col s4">\n' +
-    '                            <input id="name" placeholder="Имя" type="text" class="validate" :value="trainer.name">\n' +
+    '                            <input id="name" placeholder="Имя" type="text" class="validate" v-model="trainer.name">\n' +
     '                        </div>\n' +
     '                        <div class="input-field col s4">\n' +
     '                            <input id="dayOfBirth" placeholder="Дата рождения" type="text" class="datepicker">\n' +
     '                        </div>\n' +
     '                        <div class="input-field col s12">\n' +
-    '                            <select>\n' +
+    '                            <select v-model="trainer.qualification">\n' +
     '                                <option value="" disabled>Квалификация</option>\n' +
     '                                <option value="1" data-icon="/static/icons/awards/award_star_gold_1.png"  class="left circle">Тренер-преподаватель высшего уровня квалификации высшей категории</option>\n' +
     '                                <option value="2" data-icon="/static/icons/awards/medal_gold_1.png"       class="left circle">Тренер-преподаватель высшего уровня квалификации первой категории</option>\n' +
@@ -113,11 +113,12 @@ Vue.component('trainer-info', {
 
     methods: {
         save: function() {
-            console.log(this);
-            $('#saveTrainer').modal('open');
+            this.trainer.qualification = $('.select-dropdown').val();
+            this.trainer.dayOfBirth = $('.datepicker').pickadate('picker').get('select').pick;
+            Trainer.saveTrainer(Trainer.trainersList.trainer)
         },
         remove: function() {
-            $('.trainer-confirm-name').text('Тренер «' + (this.trainer.family) + '» <b>удален</b>. Продолжить?');
+            $('.trainer-confirm-name').html('Тренер «' + (this.trainer.family) + '» <b>удален</b>. Продолжить?');
             $('.trainer-confirm-remove').attr(
                 'data-trainer-id', this.trainer.id
             );

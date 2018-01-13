@@ -69,12 +69,8 @@
 
 
     Trainer.saveTrainer = function(trainer) {
-        console.log(trainer);
-        if (true)
-            return;
-
         Application.put("/trainer/save", trainer, function(data) {
-            console.log(data);
+            $('#saveTrainer').modal('open');
         });
     };
 
