@@ -12,19 +12,28 @@
     };
 
 
-    Sportsman.getSportsman = function(sportsmanId) {
-
+    Sportsman.getSportsmanInfo = function(sportsmanId, callback) {
+        Application.get("/sportsman/get/" + sportsmanId, {}, function(data) {
+            Sportsman.sportsmanList.sportsman = data;
+            callback();
+        });
     };
 
 
     Sportsman.saveSportsman = function(sportsman, callback) {
         Application.put("/sportsman/save", sportsman, function(data) {
-            console.log(data);
             if (callback) {
                 callback()
             } else {
-                $('#saveTrainer').modal('open');
+                $('#saveSportsman').modal('open');
             }
+        });
+    };
+
+
+    Sportsman.removeSportsman = function(sportsmanId, callback) {
+        Application.remove("/sportsman/remove/" + sportsmanId, {id: sportsmanId}, function(data) {
+            window.location.hash = '#sportsmanId-page-' + Sportsman.page;
         });
     };
 
@@ -34,9 +43,10 @@
         var temp = [];
         var now = new Date().getFullYear();
         array.forEach(function(item) {
-            item.title = item.family + ' '  + (item.name ? item.name.substr(0, 1) : '');
             var tempDate = new Date(item.birthDay).getFullYear();
             item.ages = (now - tempDate) + ' лет';
+            item.title = item.family + ' '  + (item.name ? item.name.substr(0, 1) : '');
+
             temp.push(item);
         });
 
@@ -63,7 +73,7 @@
                 sportsmans: [],
                 showed: true,
                 showInfo: false,
-                trainer: null,
+                sportsman: null,
                 root: '?action=sportsman-list',
                 hash: '#sportsman-page-'
             }
@@ -74,14 +84,14 @@
         Sportsman.page = 1;
         Router.watch(/^sportsman-page/, function(arg) {
             $('.pagination').show();
-            Trainer.trainersList.showed = true;
-            Trainer.trainersList.showInfo = false;
+            Sportsman.sportsmanList.showed = true;
+            Sportsman.sportsmanList.showInfo = false;
 
             var page = +arg.split('-')[2];
-            if (!$("div").is("#trainer-list")) {
+            if (!$("div").is("#sportsman-list")) {
                 var rowContent = $('<div/>', {
                     class: 'row',
-                    id: 'trainer-list'
+                    id: 'sportsman-list'
                 });
 
                 var rowPaggin = $('<div/>', {
@@ -91,7 +101,7 @@
                 }));
 
                 $('#app-content').append(rowContent).append(rowPaggin);
-                pagination = Trainer.home(page);
+                pagination = Sportsman.home(page);
             }
 
             Sportsman.getSportsmans(page, Sportsman.setContent);
@@ -100,12 +110,12 @@
         });
 
 
-        Router.watch(/^trainer-info/, function(arg) {
+        Router.watch(/^sportsman-info/, function(arg) {
             var id = arg.split('-')[2];
-            Trainer.getTrainerInfo(id, function () {
+            Sportsman.getSportsmanInfo(id, function () {
                 $('.pagination').hide();
-                Trainer.trainersList.showed = false;
-                Trainer.trainersList.showInfo = true;
+                Sportsman.sportsmanList.showed = false;
+                Sportsman.sportsmanList.showInfo = true;
 
                 $(document).ready(function() {
                     var $input = $('.datepicker').pickadate({
@@ -118,10 +128,10 @@
                     });
 
                     var picker = $input.pickadate('picker');
-                    picker.set('select', Trainer.trainersList.trainer.dayOfBirth);
+                    picker.set('select', Sportsman.sportsmanList.sportsman.birthDay);
 
                     $('select').material_select();
-                    $('.select-dropdown').val(Trainer.trainersList.trainer.qualification);
+                    $('.select-dropdown').val(Sportsman.sportsmanList.sportsman.qualification);
                 });
 
             });
@@ -129,11 +139,10 @@
     };
 
 
-
     Sportsman.basicInit = function () {
         $(document).ready(function() {
             $('.modal').modal();
-            var $input = $('.datepicker').pickadate({
+            $('.datepicker').pickadate({
                 selectMonths: true,
                 selectYears: 30,
                 today: 'Сегодня',
@@ -155,6 +164,11 @@
         return result
     }
 
+
+    $('.sportsman-confirm-remove').on('click', function() {
+        var id = $(this).attr('data-sportsman-id');
+        Sportsman.removeSportsman(id);
+    });
 
     window.Sportsman = Sportsman;
 })();

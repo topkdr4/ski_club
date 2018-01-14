@@ -1,10 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="col s10">
     <div class="row" id="sportsman-list">
 
         <sportsman-cards
                 v-for="(item, index) in sportsmans"
                 v-bind:sportsman="item"
+                v-bind:key="item.id"
+                v-if="showed"
         ></sportsman-cards>
+
+        <sportsman-info
+                v-if="showInfo"
+                v-bind:sportsman="sportsman"
+        ></sportsman-info>
 
 
         <div class="col s12 sportsman_pagination">
@@ -19,6 +27,24 @@
             </ul>
         </div>
 
+    </div>
+</div>
+
+<!-- Удаление спортсмена -->
+<div id="removeSportsman" class="modal">
+    <div class="modal-content">
+        <h4>Внимание!</h4>
+        <p class="sportsman-confirm-name">Вы действительно желаете <b>удалить</b> спортсмена</p>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-red btn-flat sportsman-confirm-remove" data-trainer-id="0">Удалить</a>
+    </div>
+</div>
+
+<!-- Сохранение спортсмена -->
+<div id="saveSportsman" class="modal">
+    <div class="modal-content">
+        <h4>Сохранено</h4>
     </div>
 </div>
 

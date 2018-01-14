@@ -97,7 +97,7 @@ Vue.component('trainer-info', {
             }
         },
         remove: function() {
-            $('.trainer-confirm-name').html('Тренер «' + (this.trainer.family) + '» <b>удален</b>. Продолжить?');
+            $('.trainer-confirm-name').html('Тренер «' + (this.trainer.family) + '» будет <b>удален</b>. Продолжить?');
             $('.trainer-confirm-remove').attr(
                 'data-trainer-id', this.trainer.id
             );

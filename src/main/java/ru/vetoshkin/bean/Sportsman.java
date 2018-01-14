@@ -36,7 +36,7 @@ public class Sportsman {
     private boolean sex;
 
 
-    public int Integer() {
+    public int getId() {
         return id;
     }
 

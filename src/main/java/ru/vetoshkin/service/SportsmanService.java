@@ -1,5 +1,6 @@
 package ru.vetoshkin.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.postgresql.util.PGobject;

@@ -167,8 +167,6 @@
     }
 
 
-
-
     $('.trainer-confirm-remove').on('click', function() {
        var id = $(this).attr('data-trainer-id');
        Trainer.removeTrainer(id);

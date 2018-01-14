@@ -1,5 +1,5 @@
 <%@ page import="ru.vetoshkin.util.PageService" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" errorPage="/pages/500.jsp"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" errorPage="/pages/500.jsp" pageEncoding="UTF-8"%>
 <html lang="ru">
 <head>
 

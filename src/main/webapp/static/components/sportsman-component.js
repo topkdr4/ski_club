@@ -1,7 +1,7 @@
 Vue.component('sportsman-cards', {
     props: [ 'sportsman' ],
-    template: '<div class="col s4">\n' +
-    '        <div id="app1" class="card hoverable">\n' +
+    template: '<div class="col s4" @click="getSportsmanInfo">\n' +
+    '        <div class="card hoverable">\n' +
     '            <div class="person card-content">\n' +
     '                <div class="person-image"' +
     '                   v-bind:class="[{man : sportsman.sex}, {wom : !sportsman.sex}]"' +
@@ -22,7 +22,12 @@ Vue.component('sportsman-cards', {
     '                </div>\n' +
     '            </div>\n' +
     '        </div>\n' +
-    '    </div>'
+    '    </div>',
+    methods: {
+        getSportsmanInfo: function () {
+            window.location.hash = '#sportsman-info-'+this.sportsman.id;
+        }
+    }
 });
 
 
@@ -87,6 +92,11 @@ Vue.component('sportsman-info', {
     '                                <a class="waves-effect waves-light btn-large red darken-2" @click="remove">Удалить</a>\n' +
     '                            </p>\n' +
     '                        </div>\n' +
+    '                        <div class="col s12" v-if="sportsman.id">\n' +
+    '                            <p>\n' +
+    '                                <a :href="href">К списку спортсменов</a>\n' +
+    '                            </p>\n' +
+    '                        </div>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '            </div>\n' +
@@ -109,16 +119,16 @@ Vue.component('sportsman-info', {
             }
         },
         remove: function() {
-            $('.trainer-confirm-name').html('Тренер «' + (this.trainer.family) + '» <b>удален</b>. Продолжить?');
-            $('.trainer-confirm-remove').attr(
-                'data-trainer-id', this.trainer.id
+            $('.sportsman-confirm-name').html('Спортсмен «' + (this.sportsman.family) + '» будет <b>удален</b>. Продолжить?');
+            $('.sportsman-confirm-remove').attr(
+                'data-sportsman-id', this.sportsman.id
             );
-            $('#removeTrainer').modal('open');
+            $('#removeSportsman').modal('open');
         }
     },
     computed: {
         href: function() {
-            return '#trainer-page-' + Trainer.page;
+            return '#sportsman-page-' + Sportsman.page;
         }
     }
 });
