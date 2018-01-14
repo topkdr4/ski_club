@@ -25,22 +25,23 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Sportsman {
 
-    private int id;
+    private Integer id;
     private String family;
     private String name;
     private String qualification;
     private double weight;
-    private double hieght;
+    private double height;
     private Date birthDay;
     private int yearOfStart;
+    private boolean sex;
 
 
-    public int getId() {
+    public int Integer() {
         return id;
     }
 
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -85,13 +86,13 @@ public class Sportsman {
     }
 
 
-    public double getHieght() {
-        return hieght;
+    public double getHeight() {
+        return height;
     }
 
 
-    public void setHieght(double hieght) {
-        this.hieght = hieght;
+    public void setHeight(double height) {
+        this.height = height;
     }
 
 
@@ -112,5 +113,15 @@ public class Sportsman {
 
     public void setYearOfStart(int yearOfStart) {
         this.yearOfStart = yearOfStart;
+    }
+
+
+    public boolean isSex() {
+        return sex;
+    }
+
+
+    public void setSex(boolean sex) {
+        this.sex = sex;
     }
 }

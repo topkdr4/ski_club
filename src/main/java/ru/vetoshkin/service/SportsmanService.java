@@ -27,29 +27,7 @@ public class SportsmanService {
 
 
     public static void saveSportsman(Sportsman sportsman) throws SystemException {
-        String method = "{? = call save_sportsman(?)}";
-
-        try (Connection connection = HikariPool.getSource().getConnection()) {
-            connection.setAutoCommit(true);
-
-            CallableStatement statement = connection.prepareCall(method);
-            statement.registerOutParameter(1, Types.INTEGER);
-
-            PGobject jsonObject = new PGobject();
-            jsonObject.setType("json");
-            jsonObject.setValue(Jackson.toJson(sportsman));
-
-            statement.setObject(2, jsonObject);
-
-            logger.info(method);
-            statement.execute();
-
-            int id = statement.getInt(1);
-            sportsman.setId(id);
-
-        } catch (Exception e) {
-            throw new SystemException(e);
-        }
+        Service.save(sportsman, "{? = call save_sportsman(?)}");
     }
 
 
@@ -121,10 +99,11 @@ public class SportsmanService {
         result.setFamily(set.getString(2));
         result.setName(set.getString(3));
         result.setWeight(set.getDouble(4));
-        result.setHieght(set.getDouble(5));
+        result.setHeight(set.getDouble(5));
         result.setBirthDay(set.getDate(6));
         result.setYearOfStart(set.getInt(7));
         result.setQualification(set.getString(8));
+        result.setSex(set.getBoolean(9));
 
         return result;
     }
@@ -160,21 +139,6 @@ public class SportsmanService {
 
 
     public static int getAllSportsmansCount() throws SystemException {
-        String method = "{? = call get_sportsmans_count()}";
-
-        try (Connection connection = HikariPool.getSource().getConnection()) {
-            connection.setAutoCommit(true);
-
-            CallableStatement statement = connection.prepareCall(method);
-            statement.registerOutParameter(1, Types.INTEGER);
-
-            logger.info(method);
-            statement.execute();
-
-            return statement.getInt(1);
-
-        } catch (Exception e) {
-            throw new SystemException(e);
-        }
+        return Service.getCount("{? = call get_sportsmans_count()}");
     }
 }

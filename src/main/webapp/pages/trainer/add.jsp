@@ -7,7 +7,7 @@
 </div>
 
 <script type="text/javascript" src="../static/js/trainer.js"></script>
-<script type="text/javascript" src="../static/vue/components.js"></script>
+<script type="text/javascript" src="../static/components/trainer-component.js"></script>
 
 <script type="text/javascript">
     Trainer.page = 1;

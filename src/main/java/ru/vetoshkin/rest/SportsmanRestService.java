@@ -1,11 +1,13 @@
 package ru.vetoshkin.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import ru.vetoshkin.bean.Sportsman;
 import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.service.SportsmanService;
 import ru.vetoshkin.service.TrainerService;
+import ru.vetoshkin.util.Jackson;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -57,18 +59,18 @@ public class SportsmanRestService {
 
 
     @GET
-    @Path("/get")
-    public Sportsman getSportsman(IdentityRequest request) throws SystemException {
-        logger.debug("get sportsman info with id: " + request.getId());
-        return SportsmanService.getSportsman(request.getId());
+    @Path("/get/{id}")
+    public Sportsman getSportsman(@PathParam("id") int id) throws SystemException {
+        logger.debug("get sportsman info with id: " + id);
+        return SportsmanService.getSportsman(id);
     }
 
 
     @DELETE
-    @Path("/remove")
-    public Response removeSportsman(IdentityRequest request) {
-        logger.debug("remove sportsman with id: " + request.getId());
-        SportsmanService.removeSportsman(request.getId());
+    @Path("/remove/{id}")
+    public Response removeSportsman(@PathParam("id") int id) {
+        logger.debug("remove sportsman with id: " + id);
+        SportsmanService.removeSportsman(id);
         return EMPTY;
     }
 

@@ -90,10 +90,18 @@
 }
 
 
-.person-image-preview {
+.fullMan {
     height:                 275px;
     width:                  100%;
     background:             url("../icons/man_ski.png") center center no-repeat;
+    background-size:        contain;
+}
+
+
+.fullWom {
+    height:                 275px;
+    width:                  100%;
+    background:             url("../icons/wom_ski.png") center center no-repeat;
     background-size:        contain;
 }
 

@@ -14,9 +14,10 @@ public class PageService {
     private static final Map<String, String> pages = new HashMap<>();
 
     public static void init() {
-        pages.put("trainer-list", "/pages/trainer/list.jsp");
-        pages.put("trainer-add", "/pages/trainer/add.jsp");
+        pages.put("trainer-list",   "/pages/trainer/list.jsp");
+        pages.put("trainer-add",    "/pages/trainer/add.jsp");
         pages.put("sportsman-list", "/pages/sportsman/list.jsp");
+        pages.put("sportsman-add",  "/pages/sportsman/add.jsp");
     }
 
 

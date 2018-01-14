@@ -17,6 +17,18 @@
     };
 
 
+    Sportsman.saveSportsman = function(sportsman, callback) {
+        Application.put("/sportsman/save", sportsman, function(data) {
+            console.log(data);
+            if (callback) {
+                callback()
+            } else {
+                $('#saveTrainer').modal('open');
+            }
+        });
+    };
+
+
     Sportsman.setContent = function(data) {
         var array = data.result;
         var temp = [];
@@ -113,6 +125,23 @@
                 });
 
             });
+        });
+    };
+
+
+
+    Sportsman.basicInit = function () {
+        $(document).ready(function() {
+            $('.modal').modal();
+            var $input = $('.datepicker').pickadate({
+                selectMonths: true,
+                selectYears: 30,
+                today: 'Сегодня',
+                clear: 'Отчистить',
+                close: 'Ok',
+                closeOnSelect: false
+            });
+            $('select').material_select();
         });
     };
 

@@ -28,46 +28,12 @@ public class TrainerService {
 
 
     public static void saveTrainer(Trainer trainer) throws SystemException {
-        String method = "{? = call save_trainer(?)}";
-
-        try (Connection connection = HikariPool.getSource().getConnection()) {
-            connection.setAutoCommit(true);
-
-            CallableStatement statement = connection.prepareCall(method);
-            statement.registerOutParameter(1, Types.INTEGER);
-
-            PGobject jsonObject = new PGobject();
-            jsonObject.setType("json");
-            jsonObject.setValue(Jackson.toJson(trainer));
-
-            statement.setObject(2, jsonObject);
-
-            logger.info(method);
-            statement.execute();
-
-        } catch (Exception e) {
-            throw new SystemException(e);
-        }
+        Service.save(trainer, "{? = call save_trainer(?)}");
     }
 
 
     public static int getAllTrainersCount() throws SystemException {
-        String method = "{? = call get_trainers_count()}";
-
-        try (Connection connection = HikariPool.getSource().getConnection()) {
-            connection.setAutoCommit(true);
-
-            CallableStatement statement = connection.prepareCall(method);
-            statement.registerOutParameter(1, Types.INTEGER);
-
-            logger.info(method);
-            statement.execute();
-
-            return statement.getInt(1);
-
-        } catch (Exception e) {
-            throw new SystemException(e);
-        }
+        return Service.getCount("{? = call get_trainers_count()}");
     }
 
 

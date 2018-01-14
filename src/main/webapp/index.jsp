@@ -87,7 +87,7 @@
                         <i class="material-icons circle orange darken-2">format_list_bulleted</i><a href="?action=sportsman-list">Список</a>
                     </li>
                     <li class="collection-item avatar valign-wrapper">
-                        <i class="material-icons circle orange darken-2">group_add</i>Новый участник
+                        <i class="material-icons circle orange darken-2">group_add</i><a href="?action=sportsman-add">Новый участник</a>
                     </li>
                 </ul>
             </li>

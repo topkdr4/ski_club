@@ -23,7 +23,7 @@
 </div>
 
 <script type="text/javascript" src="../static/js/sportsman.js"></script>
-<script type="text/javascript" src="../static/vue/components.js"></script>
+<script type="text/javascript" src="../static/components/sportsman-component.js"></script>
 
 
 <script type="text/javascript">
