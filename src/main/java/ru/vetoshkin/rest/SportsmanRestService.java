@@ -1,13 +1,10 @@
 package ru.vetoshkin.rest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import ru.vetoshkin.bean.Sportsman;
 import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.service.SportsmanService;
-import ru.vetoshkin.service.TrainerService;
-import ru.vetoshkin.util.Jackson;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;

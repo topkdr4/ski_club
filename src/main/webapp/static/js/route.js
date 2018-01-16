@@ -54,5 +54,10 @@
     }
 
 
+    Router.triggered = function() {
+        routeHash();
+    }
+
+
     $(window).on('hashchange', routeHash);
 })();

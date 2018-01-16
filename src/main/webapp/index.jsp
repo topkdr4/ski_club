@@ -34,7 +34,7 @@
 
                 <ul class="collection collapsible-body">
                     <li class="collection-item avatar valign-wrapper">
-                        <i class="material-icons circle deep-orange darken-2">grid_on</i>Таблица
+                        <i class="material-icons circle deep-orange darken-2">grid_on</i><a href="?action=record">Таблица</a>
                     </li>
                 </ul>
 

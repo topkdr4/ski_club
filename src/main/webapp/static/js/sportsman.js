@@ -136,6 +136,9 @@
 
             });
         });
+
+        if (location.hash != '')
+            Router.triggered();
     };
 
 

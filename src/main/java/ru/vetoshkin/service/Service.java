@@ -2,13 +2,14 @@ package ru.vetoshkin.service;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.postgresql.util.PGobject;
+import ru.vetoshkin.bean.Record;
 import ru.vetoshkin.core.HikariPool;
 import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.util.Jackson;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Types;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -61,4 +62,46 @@ public class Service {
         }
     }
 
+
+    public static List<Record> getRecord(String method, boolean sex) throws SystemException {
+        List<Record> result = new ArrayList<>();
+
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(false);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.OTHER);
+            statement.setBoolean(2, sex);
+
+            logger.info(method);
+            statement.execute();
+
+            ResultSet set = (ResultSet) statement.getObject(1);
+            while (set.next()) {
+                result.add(createRecord(set));
+            }
+
+            set.close();
+        } catch (SQLException e) {
+            logger.warn(e);
+            throw new SystemException(e);
+        }
+
+        return result;
+    }
+
+
+    private static Record createRecord(ResultSet set) throws SystemException {
+        try {
+            Record record = new Record();
+            record.setId(set.getInt(1));
+            record.setFamily(set.getString(2));
+            record.setResult(set.getDouble(3));
+            record.setGame(set.getDate(4));
+
+            return record;
+        } catch (SQLException e) {
+            throw new SystemException(e);
+        }
+    }
 }
