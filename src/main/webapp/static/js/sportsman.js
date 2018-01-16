@@ -144,6 +144,7 @@
 
     Sportsman.basicInit = function () {
         $(document).ready(function() {
+            $('ul.tabs').tabs();
             $('.modal').modal();
             $('.datepicker').pickadate({
                 selectMonths: true,

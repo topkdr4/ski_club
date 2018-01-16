@@ -7,6 +7,8 @@ package ru.vetoshkin.bean;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -25,6 +27,8 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Sportsman {
 
+    private static final String[] placeString = { "first", "second", "third" };
+
     private Integer id;
     private String family;
     private String name;
@@ -34,6 +38,14 @@ public class Sportsman {
     private Date birthDay;
     private int yearOfStart;
     private boolean sex;
+    private Map<String, Integer> places = new HashMap<>();
+
+
+    {
+        places.put(placeString[0], 0);
+        places.put(placeString[1], 0);
+        places.put(placeString[2], 0);
+    }
 
 
     public int getId() {
@@ -123,5 +135,20 @@ public class Sportsman {
 
     public void setSex(boolean sex) {
         this.sex = sex;
+    }
+
+
+    public Map<String, Integer> getPlaces() {
+        return places;
+    }
+
+
+    public void setPlaces(Map<String, Integer> places) {
+        this.places = places;
+    }
+
+
+    public void setPlaces(int place, int count) {
+        places.put(placeString[place], count);
     }
 }

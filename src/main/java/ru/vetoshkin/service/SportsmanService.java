@@ -57,7 +57,7 @@ public class SportsmanService {
             }
 
             set.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new SystemException(e);
         }
 
@@ -84,7 +84,7 @@ public class SportsmanService {
             }
 
             set.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.warn(e);
             throw new SystemException(e);
         }
@@ -93,7 +93,7 @@ public class SportsmanService {
     }
 
 
-    private static Sportsman createSportsman(ResultSet set) throws SQLException {
+    private static Sportsman createSportsman(ResultSet set) throws Exception {
         Sportsman result = new Sportsman();
 
         result.setId(set.getInt(1));
@@ -105,6 +105,28 @@ public class SportsmanService {
         result.setYearOfStart(set.getInt(7));
         result.setQualification(set.getString(8));
         result.setSex(set.getBoolean(9));
+
+        String method = "select get_places(?)";
+
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(true);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.setInt(1, result.getId());
+
+            logger.info(method);
+            ResultSet resSet = statement.executeQuery();
+            int index = 0;
+            while (resSet.next()) {
+                result.setPlaces(index, resSet.getInt(1));
+                index++;
+            }
+
+            resSet.close();
+        } catch (Exception e) {
+            logger.warn(e);
+            throw new SystemException(e);
+        }
 
         return result;
     }
@@ -131,7 +153,7 @@ public class SportsmanService {
             }
 
             set.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new SystemException(e);
         }
 

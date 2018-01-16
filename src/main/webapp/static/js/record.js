@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 $('ul.tabs').tabs();
 $('select').material_select();

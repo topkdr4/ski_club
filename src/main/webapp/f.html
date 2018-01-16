@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../static/css/others.css">
+    <link type="text/css" rel="stylesheet" href="../static/lib/materialize/css/materialize.min.css"
+          media="screen,projection"/>
+
+    <title>Информация спортсмена</title>
+</head>
+<body>
+
+<nav class="teal darken-2">
+    <div class="nav-wrapper">
+        <div class="trampliner-logo">Клуб «Летающий лыжник»</div>
+    </div>
+</nav>
+
+<div class="row">
+
+    <div class="col s10">
+
+        <div class="row" id="sportsman-info">
+
+            <div class="row">
+
+                <div class="col s12 card">
+                    <ul class="tabs tabs-fixed-width tabes">
+                        <li class="tab col s3"><a href="#info" class="active teal-text text-darken-2">Информация</a></li>
+                        <li class="tab col s3"><a href="#speca" class="teal-text text-darken-2">Нормативы</a></li>
+                        <li class="tab col s3"><a href="#records" class="teal-text text-darken-2">Рекроды</a></li>
+                        <li class="tab col s3"><a href="#games" class="teal-text text-darken-2">Соревнования</a></li>
+                        <li class="tab col s3"><a href="#prognoz" class="teal-text text-darken-2">Прогноз</a></li>
+                    </ul>
+                </div>
+
+                <div class="row" id="info">
+
+                    <div class="col s3 card">
+                        <div class="col s12">
+                            <div class="person-image-preview"></div>
+                        </div>
+                        <div class="col s12">
+                            <div class="file-field input-field">
+                                <div class="btn teal darken-2">
+                                    <span>Изображение</span>
+                                    <input type="file">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s9">
+
+                        <!-- mode to games tab -->
+                        <div class="row">
+                            <div class="col s4 card">
+                                <div class="collapsible-header valign-wrapper">
+                                    <img src="static/icons/awards/award-1.png" alt="" class="circle">0
+                                </div>
+                            </div>
+                            <div class="col s4 card">
+                                <div class="collapsible-header valign-wrapper">
+                                    <img src="static/icons/awards/award-2.png" alt="" class="circle">0
+                                </div>
+                            </div>
+                            <div class="col s4 card">
+                                <div class="collapsible-header valign-wrapper">
+                                    <img src="static/icons/awards/award-3.png" alt="" class="circle">0
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row card">
+
+                            <div class="input-field col s4">
+                                <input id="family" type="text" class="validate">
+                                <label for="family">Фамилия</label>
+                            </div>
+
+                            <div class="input-field col s4">
+                                <input id="name" type="text" class="validate">
+                                <label for="name">Имя</label>
+                            </div>
+
+                            <div class="input-field col s4">
+                                <input id="sub_name" type="text" class="validate">
+                                <label for="sub_name">Отчество</label>
+                            </div>
+
+                            <div class="input-field col s4">
+                                <select>
+                                    <option value="" disabled selected>Квалификация</option>
+                                    <option value="1">Мастер спорта международного класса</option>
+                                    <option value="2">Мастер спорта</option>
+                                    <option value="3">Кандидат в мастера спорта</option>
+                                    <option value="4">I разряд</option>
+                                    <option value="5">II разряд</option>
+                                    <option value="6">III разряд</option>
+                                    <option value="7">Нет</option>
+                                </select>
+                            </div>
+
+                            <div class="input-field col s4">
+                                <input id="weight" type="number" class="validate">
+                                <label for="weight">Вес</label>
+                            </div>
+
+                            <div class="input-field col s4">
+                                <input id="height" type="number" class="validate">
+                                <label for="height">Рост</label>
+                            </div>
+
+                            <div class="input-field col s6">
+                                <input id="dayOfBirth" type="text" class="datepicker">
+                                <label for="dayOfBirth">Дата рождения</label>
+                            </div>
+
+                            <div class="col s2">
+                                <p>
+                                    <input name="sex" type="radio" id="man-sex" checked/>
+                                    <label for="man-sex">Мужской</label>
+                                </p>
+                                <p>
+                                    <input name="sex" type="radio" id="wom-sex"/>
+                                    <label for="wom-sex">Женский</label>
+                                </p>
+                            </div>
+
+                            <div class="col s2">
+                                <p>
+                                    <a class="waves-effect waves-light btn-large teal darken-2">Сохранить</a>
+                                </p>
+                            </div>
+                            <div class="col s2">
+                                <p>
+                                    <a href="#remove-sportsman"
+                                       class="waves-effect waves-light btn-large red darken-4 modal-trigger">Удалить</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div id="remove-sportsman" class="modal">
+    <div class="modal-content">
+        <h4>ВНИМАНИЕ</h4>
+        <p>Вы действительно желаете удалить [ФИО ЧЛЕНА КЛУБА]?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Продолжить</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Отмена</a>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="../static/js/jquery.js"></script>
+<script type="text/javascript" src="../static/lib/materialize/js/materialize.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('ul.tabs').tabs();
+        $('.modal').modal();
+        $('select').material_select();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Сегодня',
+            clear: 'Отчистить',
+            close: 'Ok',
+            closeOnSelect: false // Close upon selecting a date,
+        });
+    });
+</script>
+
+</body>
+</html>
