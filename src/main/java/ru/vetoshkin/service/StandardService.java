@@ -1,9 +1,12 @@
 package ru.vetoshkin.service;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.postgresql.util.PGobject;
 import ru.vetoshkin.bean.Standard;
 import ru.vetoshkin.core.HikariPool;
 import ru.vetoshkin.core.SystemException;
+import ru.vetoshkin.util.Jackson;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -72,4 +75,30 @@ public class StandardService {
     public static void removeStandard(int id) throws SystemException {
         throw new UnsupportedOperationException("");
     }
+
+
+    public static void save(Standard standard, boolean sex, int age) throws SystemException {
+        String method = "{? = call save_standart(?, ?, ?)}";
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(true);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.INTEGER);
+
+            PGobject jsonObject = new PGobject();
+            jsonObject.setType("json");
+            jsonObject.setValue(Jackson.toJson(standard));
+
+            statement.setObject(2, jsonObject);
+            statement.setBoolean(3, sex);
+            statement.setInt(4, age);
+
+            logger.info(method);
+            statement.execute();
+
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+    }
+
 }

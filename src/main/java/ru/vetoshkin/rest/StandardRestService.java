@@ -1,4 +1,5 @@
 package ru.vetoshkin.rest;
+import ru.vetoshkin.bean.Standard;
 import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.service.StandardService;
 
@@ -28,6 +29,14 @@ public class StandardRestService {
         SimpleResponse response = new SimpleResponse();
         response.setResult(StandardService.getAll(sex, age));
         return response;
+    }
+
+
+    @PUT
+    @Path("/save/{sex}/{age}")
+    public SimpleResponse save(@PathParam("sex") boolean sex, @PathParam("age")int age, Standard standard) throws SystemException {
+        StandardService.save(standard, sex, age);
+        return new SimpleResponse();
     }
 
 

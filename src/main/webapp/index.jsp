@@ -61,7 +61,7 @@
                         <i class="material-icons circle cyan darken-2">format_list_bulleted</i><a href="?action=standard-list">Список</a>
                     </li>
                     <li class="collection-item avatar valign-wrapper">
-                        <i class="material-icons circle cyan darken-2">add</i>Новый норматив
+                        <i class="material-icons circle cyan darken-2">add</i><a href="?action=standard-add">Новый норматив</a>
                     </li>
                 </ul>
             </li>

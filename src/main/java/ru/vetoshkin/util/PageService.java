@@ -20,6 +20,7 @@ public class PageService {
         pages.put("sportsman-add",  "/pages/sportsman/add.jsp");
         pages.put("record",         "/pages/records/record.jsp");
         pages.put("standard-list",  "/pages/standard/list.jsp");
+        pages.put("standard-add",   "/pages/standard/add.jsp");
     }
 
 

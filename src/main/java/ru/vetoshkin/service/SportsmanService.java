@@ -12,6 +12,7 @@ import ru.vetoshkin.util.Jackson;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -116,10 +117,11 @@ public class SportsmanService {
 
             logger.info(method);
             ResultSet resSet = statement.executeQuery();
-            int index = 0;
-            while (resSet.next()) {
-                result.setPlaces(index, resSet.getInt(1));
-                index++;
+            if (resSet.next()) {
+                Integer[] array = (Integer[]) resSet.getArray(1).getArray();
+                for (int i = 0; i < array.length; i++) {
+                    result.setPlaces(i, array[i]);
+                }
             }
 
             resSet.close();
