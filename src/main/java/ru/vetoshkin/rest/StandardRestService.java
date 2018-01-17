@@ -6,6 +6,8 @@ import ru.vetoshkin.service.StandardService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
+import java.util.Date;
+
 import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
@@ -25,9 +27,18 @@ public class StandardRestService {
 
     @GET
     @Path("/list/{sex}/{age}")
-    public SimpleResponse getWindRecord(@PathParam("sex") boolean sex, @PathParam("age") int age) throws SystemException {
+    public SimpleResponse getAll(@PathParam("sex") boolean sex, @PathParam("age") int age) throws SystemException {
         SimpleResponse response = new SimpleResponse();
         response.setResult(StandardService.getAll(sex, age));
+        return response;
+    }
+
+
+    @GET
+    @Path("/list/{id}/{date}")
+    public SimpleResponse filter(@PathParam("id") int id, @PathParam("date") long date) throws SystemException {
+        SimpleResponse response = new SimpleResponse();
+        response.setResult(StandardService.getFiltering(id, new Date(date)));
         return response;
     }
 

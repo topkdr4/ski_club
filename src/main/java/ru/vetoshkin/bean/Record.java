@@ -1,17 +1,10 @@
 package ru.vetoshkin.bean;
 
-import java.util.Date;
-
-
-
-
-
 public class Record {
 
     private int id;
     private String family;
     private double result;
-    private Date game;
 
 
     public int getId() {
@@ -43,13 +36,4 @@ public class Record {
         this.result = result;
     }
 
-
-    public Date getGame() {
-        return game;
-    }
-
-
-    public void setGame(Date game) {
-        this.game = game;
-    }
 }

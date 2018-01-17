@@ -4,6 +4,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.postgresql.util.PGobject;
 import ru.vetoshkin.bean.Standard;
+import ru.vetoshkin.bean.StandardResult;
 import ru.vetoshkin.core.HikariPool;
 import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.util.Jackson;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -101,4 +103,9 @@ public class StandardService {
         }
     }
 
+
+    public static List<StandardResult> getFiltering(int id, Date date) throws SystemException {
+
+        return null;
+    }
 }

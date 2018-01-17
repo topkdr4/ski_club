@@ -22,7 +22,6 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class TrainerRestService {
 
     private static final Logger logger = LogManager.getLogger(TrainerRestService.class);
-    private static final Response EMPTY = Response.status(200).build();
 
 
     @GET
@@ -65,10 +64,10 @@ public class TrainerRestService {
 
     @DELETE
     @Path("/remove/{id}")
-    public Response removeTrainer(@PathParam("id") int id) {
+    public SimpleResponse removeTrainer(@PathParam("id") int id) throws SystemException {
         logger.debug("remove trainer with id: " + id);
         TrainerService.removeTrainer(id);
-        return EMPTY;
+        return new SimpleResponse();
     }
 
 

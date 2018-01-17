@@ -51,7 +51,7 @@
 
 
     Trainer.removeTrainer = function(trainerId) {
-        Application.remove("/trainer/remove/" + trainerId, {id: trainerId}, function(data) {
+        Application.remove("/trainer/remove/" + trainerId, {}, function(data) {
             window.location.hash = '#trainer-page-' + Trainer.page;
         });
     };

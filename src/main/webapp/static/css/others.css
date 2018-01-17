@@ -87,6 +87,7 @@
     z-index:                10;
     display:                flex;
     justify-content:        center;
+    top:                    0;
 }
 
 

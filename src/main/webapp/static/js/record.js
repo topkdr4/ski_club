@@ -51,8 +51,7 @@ function setGraph(array, title) {
                 var s = [];
                 $.each(this.points, function(i, point) {
                     var currentValue = array[point.key - 1];
-                    var date = new Date(currentValue.game).toLocaleDateString();
-                    s.push('<a href="?action=sportsman-list#sportsman-info-' + currentValue.id + '">' + currentValue.family + '</a><br><span>' + date + '</span>');
+                    s.push('<a href="?action=sportsman-list#sportsman-info-' + currentValue.id + '">' + currentValue.family + '</a>');
                 });
 
                 return s.join(" ");
@@ -85,17 +84,14 @@ function setTable(array) {
 
     var numRow = 1;
     array.forEach(function(item) {
-        var tmpDate = new Date(item.game);
 
         var tr = $('<tr/>');
         var num = $('<td/>').text(numRow);
         var fam = $('<td/>').text(item.family);
-        var date = $('<td/>').text(tmpDate.toLocaleDateString());
         var result = $('<td/>').text(item.result);
 
         tr.append(num)
             .append(fam)
-            .append(date)
             .append(result);
 
         table.append(tr);

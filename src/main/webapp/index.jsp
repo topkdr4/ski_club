@@ -63,6 +63,9 @@
                     <li class="collection-item avatar valign-wrapper">
                         <i class="material-icons circle cyan darken-2">add</i><a href="?action=standard-add">Новый норматив</a>
                     </li>
+                    <li class="collection-item avatar valign-wrapper">
+                        <i class="material-icons circle cyan darken-2">web_asset</i><a href="?action=standard-execution">Сдача норматива</a>
+                    </li>
                 </ul>
             </li>
             <li>

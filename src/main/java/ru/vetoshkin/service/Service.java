@@ -97,7 +97,6 @@ public class Service {
             record.setId(set.getInt(1));
             record.setFamily(set.getString(2));
             record.setResult(set.getDouble(3));
-            record.setGame(set.getDate(4));
 
             return record;
         } catch (SQLException e) {

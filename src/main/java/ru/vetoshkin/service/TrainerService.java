@@ -66,13 +66,19 @@ public class TrainerService {
     }
 
 
-    public static void removeTrainer(int id) {
-        throw new UnsupportedOperationException("remove trainer not supported");
-    }
+    public static void removeTrainer(int id) throws SystemException {
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            String method = "{call remove_trainer(?)}";
+            connection.setAutoCommit(true);
 
+            CallableStatement statement = connection.prepareCall(method);
+            statement.setInt(1, id);
 
-    public static void removeTrainer(Trainer trainer) {
-        throw new UnsupportedOperationException("remove trainer not supported");
+            logger.info(method);
+            statement.execute();
+        } catch (SQLException e) {
+            throw new SystemException(e);
+        }
     }
 
 
