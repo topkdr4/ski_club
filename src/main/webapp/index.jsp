@@ -45,7 +45,7 @@
                 </div>
                 <ul class="collection collapsible-body">
                     <li class="collection-item avatar valign-wrapper">
-                        <i class="material-icons circle light-green accent-4">format_list_bulleted</i>Список
+                        <i class="material-icons circle light-green accent-4">format_list_bulleted</i><a href="?action=game-list">Список</a>
                     </li>
                     <li class="collection-item avatar valign-wrapper">
                         <i class="material-icons circle light-green accent-4">ac_unit</i>Новое соревнование

@@ -22,6 +22,7 @@ public class PageService {
         pages.put("standard-list",  "/pages/standard/list.jsp");
         pages.put("standard-add",   "/pages/standard/add.jsp");
         pages.put("standard-execution", "/pages/standard/execution.jsp");
+        pages.put("game-list",      "/pages/games/list.jsp");
     }
 
 
