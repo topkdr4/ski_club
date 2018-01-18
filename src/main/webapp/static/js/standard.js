@@ -16,7 +16,6 @@ function setContent() {
 
 
 function setTable(array) {
-    console.log(array);
     var table = $('#table > tbody');
     table.empty();
 

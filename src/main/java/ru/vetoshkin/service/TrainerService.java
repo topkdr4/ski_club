@@ -115,7 +115,7 @@ public class TrainerService {
         String method = "{? = call get_trainers()}";
 
         try (Connection connection = HikariPool.getSource().getConnection()) {
-            connection.setAutoCommit(true);
+            connection.setAutoCommit(false);
 
             CallableStatement statement = connection.prepareCall(method);
             statement.registerOutParameter(1, Types.OTHER);

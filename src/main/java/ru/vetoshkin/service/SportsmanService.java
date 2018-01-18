@@ -94,7 +94,7 @@ public class SportsmanService {
     }
 
 
-    private static Sportsman createSportsman(ResultSet set) throws Exception {
+    public static Sportsman createSportsman(ResultSet set) throws Exception {
         Sportsman result = new Sportsman();
 
         result.setId(set.getInt(1));
