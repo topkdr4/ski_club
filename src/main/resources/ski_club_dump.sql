@@ -12,7 +12,7 @@
  Target Server Version : 90604
  File Encoding         : 65001
 
- Date: 18/01/2018 17:53:46
+ Date: 19/01/2018 12:03:28
 */
 
 
@@ -25,6 +25,17 @@ INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
 START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for seq_game_info
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."seq_game_info";
+CREATE SEQUENCE "public"."seq_game_info" 
+INCREMENT 1
+MINVALUE  10
+MAXVALUE 9223372036854775807
+START 10
 CACHE 1;
 
 -- ----------------------------
@@ -105,22 +116,23 @@ CREATE TABLE "public"."t_games" (
   "judge_e" float8,
   "compensation" float8 NOT NULL,
   "wind" float8 NOT NULL,
-  "fk_game" int4
+  "fk_game" int4,
+  "id" int4
 )
 ;
 
 -- ----------------------------
 -- Records of t_games
 -- ----------------------------
-INSERT INTO "public"."t_games" VALUES (61, 133, 11, 13, 15, 17, 20, 3.5, 3, 1);
-INSERT INTO "public"."t_games" VALUES (62, 150, 1, 15, 16, 17, 20, 5, 5, 1);
-INSERT INTO "public"."t_games" VALUES (63, 15, 20, 20, 20, 20, 20, 2, 2, 1);
-INSERT INTO "public"."t_games" VALUES (61, 12, 8, 5, 17, 19, 11, 19, 1, 2);
-INSERT INTO "public"."t_games" VALUES (62, 17, 15, 15, 17, 19, 20, 2, 1, 2);
-INSERT INTO "public"."t_games" VALUES (63, 150, 17, 18, 19, 20, 15, 2, 1, 2);
-INSERT INTO "public"."t_games" VALUES (61, 140, 20, 20, 20, 20, 20, 20, 20, 3);
-INSERT INTO "public"."t_games" VALUES (63, 250, 18, 18, 20, 20, 20, 20, 20, 3);
-INSERT INTO "public"."t_games" VALUES (62, 14, 17, 20, 19, 18, 20, 20, 20, 3);
+INSERT INTO "public"."t_games" VALUES (61, 133, 11, 13, 15, 17, 20, 3.5, 3, 1, 1);
+INSERT INTO "public"."t_games" VALUES (63, 15, 20, 20, 20, 20, 20, 2, 2, 1, 3);
+INSERT INTO "public"."t_games" VALUES (62, 150, 1, 15, 16, 17, 20, 5, 5, 1, 2);
+INSERT INTO "public"."t_games" VALUES (61, 12, 8, 5, 17, 19, 11, 19, 1, 2, 4);
+INSERT INTO "public"."t_games" VALUES (62, 17, 15, 15, 17, 19, 20, 2, 1, 2, 5);
+INSERT INTO "public"."t_games" VALUES (63, 150, 17, 18, 19, 20, 15, 2, 1, 2, 6);
+INSERT INTO "public"."t_games" VALUES (61, 140, 20, 20, 20, 20, 20, 20, 20, 3, 7);
+INSERT INTO "public"."t_games" VALUES (63, 250, 18, 18, 20, 20, 20, 20, 20, 3, 8);
+INSERT INTO "public"."t_games" VALUES (62, 14, 17, 20, 19, 18, 20, 20, 20, 3, 9);
 
 -- ----------------------------
 -- Table structure for t_games_list
@@ -313,6 +325,23 @@ END; $BODY$
   COST 100;
 
 -- ----------------------------
+-- Function structure for get_games
+-- ----------------------------
+DROP FUNCTION IF EXISTS "public"."get_games"("p_date" date);
+CREATE OR REPLACE FUNCTION "public"."get_games"("p_date" date)
+  RETURNS "pg_catalog"."refcursor" AS $BODY$
+
+DECLARE
+	res refcursor;
+
+BEGIN
+	open res for select * from t_games_list where t_games_list.game_date = p_date;
+	return res;
+END; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+
+-- ----------------------------
 -- Function structure for get_judge_record
 -- ----------------------------
 DROP FUNCTION IF EXISTS "public"."get_judge_record"("p_sex" bool);
@@ -444,6 +473,29 @@ DECLARE
 BEGIN
 	select "count"(*) from t_sportsman into trainer_count;
 	return trainer_count;
+END; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+
+-- ----------------------------
+-- Function structure for get_sportsmans_game
+-- ----------------------------
+DROP FUNCTION IF EXISTS "public"."get_sportsmans_game"("p_game_id" int4);
+CREATE OR REPLACE FUNCTION "public"."get_sportsmans_game"("p_game_id" int4)
+  RETURNS "pg_catalog"."refcursor" AS $BODY$ DECLARE
+	res refcursor;
+BEGIN
+	OPEN res FOR SELECT
+	t_sportsman."family",
+	t_games.* 
+FROM
+	t_games,
+	t_sportsman 
+WHERE
+	t_sportsman.ID = t_games.fk_sportsman_id 
+	AND t_games.fk_game = p_game_id;
+RETURN res;
+
 END; $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
@@ -904,6 +956,7 @@ END; $BODY$
 -- Alter sequences owned by
 -- ----------------------------
 SELECT setval('"public"."seq_game"', 2, false);
+SELECT setval('"public"."seq_game_info"', 11, false);
 SELECT setval('"public"."seq_result"', 4, false);
 SELECT setval('"public"."seq_sportsman"', 2, false);
 SELECT setval('"public"."seq_std"', 7, true);

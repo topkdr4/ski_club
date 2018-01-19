@@ -27,4 +27,13 @@ public class GameRestService {
         return response;
     }
 
+
+    @GET
+    @Path("/sportsmans/list/{gameId}")
+    public SimpleResponse getSportsmans(@PathParam("gameId") int gameId) throws SystemException {
+        SimpleResponse response = new SimpleResponse();
+        response.setResult(GameService.getSportsmans(gameId));
+        return response;
+    }
+
 }
