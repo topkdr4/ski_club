@@ -12,7 +12,7 @@
  Target Server Version : 90604
  File Encoding         : 65001
 
- Date: 19/01/2018 12:03:28
+ Date: 20/01/2018 21:49:09
 */
 
 
@@ -24,7 +24,7 @@ CREATE SEQUENCE "public"."seq_game"
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 9223372036854775807
-START 1
+START 4
 CACHE 1;
 
 -- ----------------------------
@@ -37,6 +37,7 @@ MINVALUE  10
 MAXVALUE 9223372036854775807
 START 10
 CACHE 1;
+COMMENT ON SEQUENCE "public"."seq_game_info" IS 't_games_list';
 
 -- ----------------------------
 -- Sequence structure for seq_result
@@ -124,15 +125,14 @@ CREATE TABLE "public"."t_games" (
 -- ----------------------------
 -- Records of t_games
 -- ----------------------------
-INSERT INTO "public"."t_games" VALUES (61, 133, 11, 13, 15, 17, 20, 3.5, 3, 1, 1);
-INSERT INTO "public"."t_games" VALUES (63, 15, 20, 20, 20, 20, 20, 2, 2, 1, 3);
-INSERT INTO "public"."t_games" VALUES (62, 150, 1, 15, 16, 17, 20, 5, 5, 1, 2);
 INSERT INTO "public"."t_games" VALUES (61, 12, 8, 5, 17, 19, 11, 19, 1, 2, 4);
 INSERT INTO "public"."t_games" VALUES (62, 17, 15, 15, 17, 19, 20, 2, 1, 2, 5);
 INSERT INTO "public"."t_games" VALUES (63, 150, 17, 18, 19, 20, 15, 2, 1, 2, 6);
 INSERT INTO "public"."t_games" VALUES (61, 140, 20, 20, 20, 20, 20, 20, 20, 3, 7);
 INSERT INTO "public"."t_games" VALUES (63, 250, 18, 18, 20, 20, 20, 20, 20, 3, 8);
 INSERT INTO "public"."t_games" VALUES (62, 14, 17, 20, 19, 18, 20, 20, 20, 3, 9);
+INSERT INTO "public"."t_games" VALUES (62, 150, 1, 15, 16, 17, 20, 5, 3, 1, 2);
+INSERT INTO "public"."t_games" VALUES (63, 120, 3, 2, 5, 7, 20, 1, 1, 1, 12);
 
 -- ----------------------------
 -- Table structure for t_games_list
@@ -141,16 +141,18 @@ DROP TABLE IF EXISTS "public"."t_games_list";
 CREATE TABLE "public"."t_games_list" (
   "id" int4 NOT NULL,
   "name" varchar(255) COLLATE "pg_catalog"."default",
-  "game_date" date
+  "game_date" date,
+  "sex" bool,
+  "fk_age" int4
 )
 ;
 
 -- ----------------------------
 -- Records of t_games_list
 -- ----------------------------
-INSERT INTO "public"."t_games_list" VALUES (1, 'Чемпионат', '2018-01-17');
-INSERT INTO "public"."t_games_list" VALUES (2, 'Кубок', '2018-01-09');
-INSERT INTO "public"."t_games_list" VALUES (3, 'Первенство', '2017-12-25');
+INSERT INTO "public"."t_games_list" VALUES (2, 'Кубок', '2018-01-09', 'f', 1);
+INSERT INTO "public"."t_games_list" VALUES (3, 'Первенство', '2017-12-25', 'f', 2);
+INSERT INTO "public"."t_games_list" VALUES (1, 'Чемпионат', '2018-01-17', 't', 4);
 
 -- ----------------------------
 -- Table structure for t_sportsman
@@ -230,8 +232,8 @@ CREATE TABLE "public"."t_standarts_result" (
 -- ----------------------------
 -- Records of t_standarts_result
 -- ----------------------------
-INSERT INTO "public"."t_standarts_result" VALUES (23, 63, 1, 12, 't', '2018-01-17', 1);
 INSERT INTO "public"."t_standarts_result" VALUES (NULL, 62, 1, 12, 't', '2018-01-17', 2);
+INSERT INTO "public"."t_standarts_result" VALUES (NULL, 63, 1, 12, 't', '2018-01-17', 1);
 
 -- ----------------------------
 -- Table structure for t_trainer
@@ -249,19 +251,26 @@ CREATE TABLE "public"."t_trainer" (
 -- ----------------------------
 -- Records of t_trainer
 -- ----------------------------
-INSERT INTO "public"."t_trainer" VALUES (17, '"Фамилия"', '"Имя"', '"ТОп"', '2018-01-24');
-INSERT INTO "public"."t_trainer" VALUES (18, '"Фамилия"', '"Имя"', '"ТОп"', '2018-01-24');
-INSERT INTO "public"."t_trainer" VALUES (22, 'Фамилия"', '"Имя"', '"ТОп"', '2018-01-24');
-INSERT INTO "public"."t_trainer" VALUES (23, 'Фамилия"', '"Имя"', '"ТОп"', '2018-01-24');
-INSERT INTO "public"."t_trainer" VALUES (25, 'Фамилия', '"Имя"', '"ТОп"', '2018-01-24');
-INSERT INTO "public"."t_trainer" VALUES (27, 'Фамилия', 'Имя', 'ТОп', '2018-01-24');
-INSERT INTO "public"."t_trainer" VALUES (46, 'Фамилия', 'Имя', 'ТОп', '2018-01-24');
-INSERT INTO "public"."t_trainer" VALUES (49, 'Лучшая', 'Имя', 'Высшая', '2018-01-24');
-INSERT INTO "public"."t_trainer" VALUES (50, 'Ветошкин', 'Александ', 'Тренер-преподаватель высшего уровня квалификации второй категории', '1994-10-02');
 INSERT INTO "public"."t_trainer" VALUES (52, 'Юдкина', 'Екатерина', 'Инструктор, инструктор-методист высшего уровня квалификации первой категории', '2018-01-17');
-INSERT INTO "public"."t_trainer" VALUES (53, 'sdfsd', 'fsdfsdfds', 'Тренер-преподаватель высшего уровня квалификации высшей категории', '2018-01-16');
-INSERT INTO "public"."t_trainer" VALUES (60, 'Трататушкин', 'Ололшкин', 'Тренер-преподаватель высшего уровня квалификации высшей категории', '1973-01-12');
-INSERT INTO "public"."t_trainer" VALUES (13, 'Фамилия', 'Имя', 'Тренер-преподаватель высшего уровня квалификации без категории', '1973-10-15');
+
+-- ----------------------------
+-- Function structure for _navicat_temp_stored_proc
+-- ----------------------------
+DROP FUNCTION IF EXISTS "public"."_navicat_temp_stored_proc"("p_name" text, "p_date" date, "p_sex" bool, "p_age" int4);
+CREATE OR REPLACE FUNCTION "public"."_navicat_temp_stored_proc"("p_name" text, "p_date" date, "p_sex" bool, "p_age" int4)
+  RETURNS "pg_catalog"."void" AS $BODY$DECLARE
+	future_uid int4;
+	age int4;
+BEGIN
+	age = get_fk_std(p_age);
+	SELECT nextval('seq_game') INTO future_uid;
+	
+	insert into t_games_list("id", "name", "game_date", "sex", "fk_age")
+	values (future_uid, p_name, p_date, p_sex, age);
+
+END; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
 
 -- ----------------------------
 -- Function structure for get_compensation_record
@@ -327,15 +336,17 @@ END; $BODY$
 -- ----------------------------
 -- Function structure for get_games
 -- ----------------------------
-DROP FUNCTION IF EXISTS "public"."get_games"("p_date" date);
-CREATE OR REPLACE FUNCTION "public"."get_games"("p_date" date)
+DROP FUNCTION IF EXISTS "public"."get_games"("p_date" date, "p_sex" bool, "p_age" int4);
+CREATE OR REPLACE FUNCTION "public"."get_games"("p_date" date, "p_sex" bool, "p_age" int4)
   RETURNS "pg_catalog"."refcursor" AS $BODY$
 
 DECLARE
 	res refcursor;
+	l_fk_age int4;
 
 BEGIN
-	open res for select * from t_games_list where t_games_list.game_date = p_date;
+	select get_fk_std(p_age) into l_fk_age;
+	open res for select * from t_games_list where t_games_list.game_date = p_date and t_games_list.sex = p_sex and fk_age = l_fk_age;
 	return res;
 END; $BODY$
   LANGUAGE plpgsql VOLATILE
@@ -416,7 +427,7 @@ BEGIN
 				ind:= 1;
 				for rec2 in (select  
 											family,
-											id, 
+											t_sportsman.id, 
 											t_games.judge_a + t_games.judge_b + t_games.judge_c + t_games.judge_d + t_games.judge_e
 											+ t_games.jump_range + t_games.compensation + t_games.wind
 											- LEAST(t_games.judge_a, t_games.judge_b, t_games.judge_c, t_games.judge_d, t_games.judge_e)
@@ -735,6 +746,19 @@ END; $BODY$
   COST 100;
 
 -- ----------------------------
+-- Function structure for remove_game
+-- ----------------------------
+DROP FUNCTION IF EXISTS "public"."remove_game"("p_id" int4);
+CREATE OR REPLACE FUNCTION "public"."remove_game"("p_id" int4)
+  RETURNS "pg_catalog"."void" AS $BODY$DECLARE
+BEGIN
+	delete from t_games where t_games.fk_game = p_id;
+	delete from t_games_list where t_games_list."id" = p_id;
+END; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+
+-- ----------------------------
 -- Function structure for remove_result
 -- ----------------------------
 DROP FUNCTION IF EXISTS "public"."remove_result"("p_result_id" int4);
@@ -761,6 +785,61 @@ BEGIN
 	WHERE t_standarts_result.fk_trainer = p_trainer_id;
 	
 	delete from t_trainer where t_trainer."id" = p_trainer_id;
+END; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+
+-- ----------------------------
+-- Function structure for save_game
+-- ----------------------------
+DROP FUNCTION IF EXISTS "public"."save_game"("p_name" text, "p_date" date, "p_sex" bool, "p_age" int4);
+CREATE OR REPLACE FUNCTION "public"."save_game"("p_name" text, "p_date" date, "p_sex" bool, "p_age" int4)
+  RETURNS "pg_catalog"."void" AS $BODY$DECLARE
+	future_uid int4;
+	age int4;
+BEGIN
+	age = get_fk_std(p_age);
+	SELECT nextval('seq_game') INTO future_uid;
+	
+	insert into t_games_list("id", "name", "game_date", "sex", "fk_age")
+	values (future_uid, p_name, p_date, p_sex, age);
+
+END; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+
+-- ----------------------------
+-- Function structure for save_game_result
+-- ----------------------------
+DROP FUNCTION IF EXISTS "public"."save_game_result"("p_sport_id" int4, "p_jump" float8, "p_judge_a" float8, "p_judge_b" float8, "p_judge_c" float8, "p_judge_d" float8, "p_judge_e" float8, "p_comp" float8, "p_wind" float8, "p_game_id" int4, "p_id" int4);
+CREATE OR REPLACE FUNCTION "public"."save_game_result"("p_sport_id" int4, "p_jump" float8, "p_judge_a" float8, "p_judge_b" float8, "p_judge_c" float8, "p_judge_d" float8, "p_judge_e" float8, "p_comp" float8, "p_wind" float8, "p_game_id" int4, "p_id" int4)
+  RETURNS "pg_catalog"."void" AS $BODY$DECLARE
+	future_uid int4;
+BEGIN
+	
+	if p_id = 0 then
+		SELECT nextval('seq_game_info') INTO future_uid;
+		insert into t_games ("fk_sportsman_id", "jump_range", "judge_a", "judge_b", "judge_c", "judge_d", "judge_e", "compensation", "wind", "fk_game", "id")
+		values (p_sport_id, p_jump, p_judge_a, p_judge_b, p_judge_c, p_judge_d, p_judge_e, p_comp, p_wind, p_game_id, future_uid);
+		-- Добавление нового результата
+		return;
+	end if;
+	
+	-- Обновление результата	
+	update t_games
+		set 
+			"fk_sportsman_id" = p_sport_id,
+			"jump_range" = p_jump, 
+			"judge_a" = p_judge_a, 
+			"judge_b" = p_judge_b, 
+			"judge_c" = p_judge_c, 
+			"judge_d" = p_judge_d, 
+			"judge_e" = p_judge_e, 
+			"compensation" = p_comp, 
+			"wind" = p_wind, 
+			"fk_game" = p_game_id
+	where t_games."id" = p_id;
+
 END; $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
@@ -955,8 +1034,8 @@ END; $BODY$
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
-SELECT setval('"public"."seq_game"', 2, false);
-SELECT setval('"public"."seq_game_info"', 11, false);
+SELECT setval('"public"."seq_game"', 6, true);
+SELECT setval('"public"."seq_game_info"', 13, true);
 SELECT setval('"public"."seq_result"', 4, false);
 SELECT setval('"public"."seq_sportsman"', 2, false);
 SELECT setval('"public"."seq_std"', 7, true);
@@ -1002,6 +1081,11 @@ ALTER TABLE "public"."t_trainer" ADD CONSTRAINT "t_trainer_pkey" PRIMARY KEY ("i
 -- ----------------------------
 ALTER TABLE "public"."t_games" ADD CONSTRAINT "fk_game" FOREIGN KEY ("fk_game") REFERENCES "public"."t_games_list" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."t_games" ADD CONSTRAINT "fk_sportm" FOREIGN KEY ("fk_sportsman_id") REFERENCES "public"."t_sportsman" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table t_games_list
+-- ----------------------------
+ALTER TABLE "public"."t_games_list" ADD CONSTRAINT "fk_ag" FOREIGN KEY ("fk_age") REFERENCES "public"."t_age_types" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Keys structure for table t_standarts_result

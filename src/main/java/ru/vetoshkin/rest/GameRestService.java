@@ -48,7 +48,7 @@ public class GameRestService {
     @PUT
     @Path("/gameresult/save")
     public SimpleResponse saveResult(GameResult result) throws SystemException, JsonProcessingException {
-        System.out.println(Jackson.toJson(result));
+        GameService.saveGameResult(result);
         return new SimpleResponse();
     }
 

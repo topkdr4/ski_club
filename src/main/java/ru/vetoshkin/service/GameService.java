@@ -5,6 +5,7 @@ import ru.vetoshkin.bean.Game;
 import ru.vetoshkin.bean.GameResult;
 import ru.vetoshkin.core.HikariPool;
 import ru.vetoshkin.core.SystemException;
+import ru.vetoshkin.util.Jackson;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -159,4 +160,33 @@ public class GameService {
             throw new SystemException(e);
         }
     }
+
+
+    public static void saveGameResult(GameResult result) throws SystemException {
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            logger.info(Jackson.toJson(result));
+            String method = "{call save_game_result(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            connection.setAutoCommit(true);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.setInt(1, result.getSportsmanId());
+            statement.setDouble(2, result.getJump());
+            int ind = 3;
+            for (double v : result.getJudge()) {
+                statement.setDouble(ind, v);
+                ind = ind + 1;
+            }
+
+            statement.setDouble(8, result.getCompensation());
+            statement.setDouble(9, result.getWind());
+            statement.setInt(10, result.getGameId());
+            statement.setInt(11, result.getResultGameId() == null ? 0 : result.getResultGameId());
+
+            logger.info(method);
+            statement.execute();
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+    }
+
 }
