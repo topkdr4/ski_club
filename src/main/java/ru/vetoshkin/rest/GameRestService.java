@@ -20,10 +20,14 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class GameRestService {
 
     @GET
-    @Path("/list/{date}")
-    public SimpleResponse getAllGames(@PathParam("date") long date) throws SystemException {
+    @Path("/list/{date}/{sex}/{age}")
+    public SimpleResponse getAllGames(
+            @PathParam("date") long date,
+            @PathParam("sex") boolean sex,
+            @PathParam("age") int age)
+            throws SystemException {
         SimpleResponse response = new SimpleResponse();
-        response.setResult(GameService.getGameList(date));
+        response.setResult(GameService.getGameList(date, sex, age));
         return response;
     }
 

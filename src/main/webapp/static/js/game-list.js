@@ -18,7 +18,10 @@ function setContent() {
     var table = $('#table > tbody');
     table.empty();
 
-    Application.get("/games/list/" + picker.get('select').pick, {}, function(data) {
+    Application.get("/games/list/" +
+        picker.get('select').pick + '/'
+        + $('#sex').val() + '/'
+        + $('#ages').val(), {}, function(data) {
         var num = 1;
         data.result.forEach(function(game) {
             var tr = $('<tr/>');
@@ -27,7 +30,7 @@ function setContent() {
             var name = $('<td/>').text(game.name);
             var info = $('<td/>').append(
                 $('<a/>', {
-                    href: '?action=game-info&id=' + game.id
+                    href: '?action=game-info&sex=' + $('#sex').val() + '&ages=' + $('#ages').val() + '&id=' + game.id
                 }).text('Подробнее')
             );
 
@@ -43,5 +46,6 @@ function setContent() {
 
 $('#gameDate').on('change', setContent);
 $('#sex').on('change', setContent);
+$('#ages').on('change', setContent);
 
 setContent();

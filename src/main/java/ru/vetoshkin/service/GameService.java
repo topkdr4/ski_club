@@ -21,15 +21,17 @@ public class GameService {
 
     private static final Logger logger = LogManager.getLogger(GameService.class);
 
-    public static List<Game> getGameList(long date) throws SystemException {
+    public static List<Game> getGameList(long date, boolean sex, int age) throws SystemException {
         List<Game> result = new ArrayList<>();
-        String method = "{? = call get_games(?)}";
+        String method = "{? = call get_games(?, ?, ?)}";
         try (Connection connection = HikariPool.getSource().getConnection()) {
             connection.setAutoCommit(false);
 
             CallableStatement statement = connection.prepareCall(method);
             statement.registerOutParameter(1, Types.OTHER);
             statement.setDate(2, new Date(date));
+            statement.setBoolean(3, sex);
+            statement.setInt(4, age);
 
             logger.info(method);
             statement.execute();
