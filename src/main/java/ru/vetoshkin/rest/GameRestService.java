@@ -40,4 +40,33 @@ public class GameRestService {
         return response;
     }
 
+
+    @DELETE
+    @Path("/remove/{id}")
+    public SimpleResponse removeResult(@PathParam("id") int id) throws SystemException {
+        GameService.removeResult(id);
+        return new SimpleResponse();
+    }
+
+
+    @DELETE
+    @Path("/game/remove/{id}")
+    public SimpleResponse removeGame(@PathParam("id") int id) throws SystemException {
+        GameService.removeGame(id);
+        return new SimpleResponse();
+    }
+
+
+    @PUT
+    @Path("/add/{name}/{date}/{sex}/{age}")
+    public SimpleResponse saveGame(
+            @PathParam("name") String name,
+            @PathParam("date") long date,
+            @PathParam("sex") boolean sex,
+            @PathParam("age") int age
+    ) throws SystemException {
+        GameService.saveGame(name, date, sex, age);
+        return new SimpleResponse();
+    }
+
 }

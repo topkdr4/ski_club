@@ -41,16 +41,8 @@
             </li>
             <li>
                 <div class="collapsible-header">
-                    <i class="material-icons">casino</i>Соревнования
+                    <i class="material-icons">casino</i><a href="?action=game-list" style="color: rgba(0, 0, 0, 0.87);">Соревнования</a>
                 </div>
-                <ul class="collection collapsible-body">
-                    <li class="collection-item avatar valign-wrapper">
-                        <i class="material-icons circle light-green accent-4">format_list_bulleted</i><a href="?action=game-list">Список</a>
-                    </li>
-                    <li class="collection-item avatar valign-wrapper">
-                        <i class="material-icons circle light-green accent-4">ac_unit</i>Новое соревнование
-                    </li>
-                </ul>
             </li>
             <li>
                 <div class="collapsible-header">

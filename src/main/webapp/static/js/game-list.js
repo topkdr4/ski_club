@@ -9,6 +9,7 @@ var $input = $('#gameDate').pickadate({
     closeOnSelect: false
 });
 $("select").material_select();
+$('.modal').modal();
 
 var picker = $input.pickadate('picker');
 picker.set('select', new Date().getTime());
@@ -34,18 +35,49 @@ function setContent() {
                 }).text('Подробнее')
             );
 
+            var remove = $('<td/>').append($('<a/>',{
+                class: 'red-text removeGame',
+                href: 'javascript:;',
+                'game-id': game.id
+            }).text('Удалить'));
 
             tr.append(numLine)
                 .append(name)
-                .append(info);
+                .append(info)
+                .append(remove);
 
             table.append(tr);
         });
     });
 }
 
+
+function addNewGame() {
+    $('#gameName').val('');
+    var modal = $('#new-game-modal');
+    modal.modal('open');
+}
+
+
+function saveGame() {
+    Application.put('/games/add/' +
+        $('#gameName').val() + '/' +
+        picker.get('select').pick + '/' +
+        $('#sex').val() + '/' +
+        $('#ages').val(), {}, setContent);
+}
+
+
+function removeGame() {
+    Application.remove("/games/game/remove/" + $(this).attr('game-id'), {}, setContent);
+}
+
+
 $('#gameDate').on('change', setContent);
 $('#sex').on('change', setContent);
 $('#ages').on('change', setContent);
+$('#newGame').on('click', addNewGame);
+$('#saveGame').on('click', saveGame);
+$('#table').on('click', '.removeGame', removeGame);
 
 setContent();

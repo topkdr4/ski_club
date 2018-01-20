@@ -112,4 +112,51 @@ public class GameService {
             throw new SystemException(e);
         }
     }
+
+
+    public static void removeResult(int id) throws SystemException {
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            String method = "delete from t_games where t_games.id = " + id;
+            connection.setAutoCommit(true);
+            CallableStatement statement = connection.prepareCall(method);
+            logger.info(method);
+            statement.execute();
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+    }
+
+
+    public static void saveGame(String name, long date, boolean sex, int age) throws SystemException {
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            String method = "{call save_game(?, ?, ?, ?)}";
+            connection.setAutoCommit(true);
+            CallableStatement statement = connection.prepareCall(method);
+
+            statement.setString(1, name);
+            statement.setDate(2, new Date(date));
+            statement.setBoolean(3, sex);
+            statement.setInt(4, age);
+
+            logger.info(method);
+            statement.execute();
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+    }
+
+
+    public static void removeGame(int id) throws SystemException {
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            String method = "{call remove_game(?)}";
+            connection.setAutoCommit(true);
+            CallableStatement statement = connection.prepareCall(method);
+            statement.setInt(1, id);
+
+            logger.info(method);
+            statement.execute();
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+    }
 }

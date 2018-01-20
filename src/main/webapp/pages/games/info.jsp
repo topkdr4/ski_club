@@ -1,5 +1,6 @@
-<%@ page import="ru.vetoshkin.util.PageService" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="ru.vetoshkin.service.SportsmanService" %>
+<%@ page import="ru.vetoshkin.util.Jackson" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="../500.jsp" %>
 <div class="col s10">
     <div class="row card">
         <table class="striped centered" id="table">
@@ -41,7 +42,7 @@
     </div>
 
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-small teal darken-2 waves-effect waves-light modal-trigger" href="#competitor">
+        <a class="btn-floating btn-small teal darken-2 waves-effect waves-light">
             <i class="large material-icons" id="newResult">add</i>
         </a>
     </div>
@@ -114,8 +115,11 @@
 
 
 <script type="text/javascript">
-    var id  = <%=Integer.parseInt(request.getParameter("id"))%>;
-    var sex = <%=Boolean.parseBoolean(request.getParameter("sex"))%>;
+    var sportsmans = <%=Jackson.toJson(SportsmanService.getSportsmansCategory(
+            Boolean.parseBoolean(request.getParameter("sex")),
+            Integer.parseInt(request.getParameter("ages"))
+    ))%>;
+    var id = <%=Integer.parseInt(request.getParameter("id"))%>;
 </script>
 <script type="text/javascript" src="../static/js/game-info.js"></script>
 

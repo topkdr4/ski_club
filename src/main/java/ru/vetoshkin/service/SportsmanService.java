@@ -163,6 +163,35 @@ public class SportsmanService {
     }
 
 
+    public static List<Sportsman> getSportsmansCategory(boolean sex, int age) throws SystemException {
+        String method = "{? = call get_sportsmens_category(?, ?)}";
+        List<Sportsman> result = new ArrayList<>();
+
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(false);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.OTHER);
+            statement.setBoolean(2, sex);
+            statement.setInt(3, age);
+
+            logger.info(method);
+            statement.execute();
+
+            ResultSet set = (ResultSet) statement.getObject(1);
+            while (set.next()) {
+                result.add(createSportsman(set));
+            }
+
+            set.close();
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+
+        return result;
+    }
+
+
     public static int getAllSportsmansCount() throws SystemException {
         return Service.getCount("{? = call get_sportsmans_count()}");
     }

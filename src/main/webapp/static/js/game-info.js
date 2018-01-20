@@ -1,11 +1,21 @@
 "use strict";
 
 $('.modal').modal();
+var sportsmansList = $('#sportsman');
+sportsmansList.empty();
+sportsmans.forEach(function(item) {
+    sportsmansList.append($('<option></option>', {
+        value: item.id,
+        text: item.family
+    }));
+});
+$("select").material_select();
+
 
 
 var games = {};
 
-function getFameInfo() {
+function getGameInfo() {
     var table = $('#table > tbody');
     table.empty();
 
@@ -76,7 +86,7 @@ function getFameInfo() {
             var more = $('<a/>', {
                 class: 'get-more-info'
             }).text('Подробнее').attr({
-                'data-gameResult-id': gameInfo.gameId,
+                'data-gameResult-id': gameInfo.resultGameId,
                 'href': 'javascript:;'
             });
 
@@ -101,9 +111,17 @@ function getResultInfo() {
 
     var current = $(this);
     if (current.attr('data-gameResult-id')) {
-        $('#removeResult').show();
+        $('#removeResult').attr({
+            'data-gameResult-id': current.attr('data-gameResult-id')
+        }).show();
+        $('#saveResult').attr({
+            'data-gameResult-id': current.attr('data-gameResult-id')
+        }).show();
     } else {
         $('#removeResult').hide();
+        $('#saveResult').attr({
+            'data-gameResult-id': null
+        }).show();
     }
 
     var modal = $('#game-result');
@@ -111,6 +129,15 @@ function getResultInfo() {
 }
 
 
-getFameInfo();
+function removeResult() {
+    Application.remove("/games/remove/" + $(this).attr('data-gameResult-id'), {}, function() {
+        clear();
+        getGameInfo();
+    });
+}
+
+
+getGameInfo();
 $('#table').on('click', '.get-more-info', getResultInfo);
 $('#newResult').on('click', getResultInfo);
+$('#removeResult').on('click', removeResult);

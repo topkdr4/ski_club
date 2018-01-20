@@ -30,6 +30,7 @@
                 <th>#</th>
                 <th>Название</th>
                 <th>Результаты</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -40,6 +41,24 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-small teal darken-2 waves-effect waves-light">
+            <i class="large material-icons" id="newGame">add</i>
+        </a>
+    </div>
+
+    <div id="new-game-modal" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="gameName" type="text" placeholder="Наименование соревнования">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="javascript:;" id="saveGame" class="modal-action modal-close waves-effect waves-teal btn-flat">Добавить</a>
+        </div>
     </div>
 </div>
 
