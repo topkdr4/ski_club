@@ -1,9 +1,11 @@
 "use strict";
 
+var sports = {};
 $('.modal').modal();
 var sportsmansList = $('#sportsman');
 sportsmansList.empty();
 sportsmans.forEach(function(item) {
+    sports[item.id] = item;
     sportsmansList.append($('<option></option>', {
         value: item.id,
         text: item.family
@@ -66,7 +68,7 @@ function getGameInfo() {
 
 
         data.result.forEach(function(gameInfo) {
-            games[gameInfo.gameId] = gameInfo;
+            games[gameInfo.resultGameId] = gameInfo;
 
             var tr = $('<tr/>');
 
@@ -102,7 +104,21 @@ function getGameInfo() {
 
 
 function clear() {
+    $('.input-field > input').val('');
+}
 
+
+function fillModal(id) {
+    var game = games[id];
+    $('#range').val(game.jump);
+    $('#compensation').val(game.compensation);
+    $('#wind').val(game.wind);
+    $('#judgeA').val(game.judge[0]);
+    $('#judgeB').val(game.judge[1]);
+    $('#judgeC').val(game.judge[2]);
+    $('#judgeD').val(game.judge[3]);
+    $('#judgeE').val(game.judge[4]);
+    $('#sportsman').val(game.sportsmanId);
 }
 
 
@@ -117,6 +133,7 @@ function getResultInfo() {
         $('#saveResult').attr({
             'data-gameResult-id': current.attr('data-gameResult-id')
         }).show();
+        fillModal(current.attr('data-gameResult-id'));
     } else {
         $('#removeResult').hide();
         $('#saveResult').attr({
@@ -130,10 +147,23 @@ function getResultInfo() {
 
 
 function removeResult() {
-    Application.remove("/games/remove/" + $(this).attr('data-gameResult-id'), {}, function() {
-        clear();
-        getGameInfo();
-    });
+    Application.remove("/games/remove/" + $(this).attr('data-gameResult-id'), {}, getGameInfo);
+}
+
+
+function saveResult() {
+    var resultId = $(this).attr('data-gameResult-id');
+    var sportsman = sports[$('#sportsman').val()];
+    Application.put('/games/gameresult/save', {
+        resultGameId: resultId,
+        family: sportsman.family,
+        sportsmanId: sportsman.id,
+        jump: $('#range').val(),
+        compensation: $('#compensation').val(),
+        wind: $('#wind').val(),
+        judge: [ $('#judgeA').val(), $('#judgeB').val(), $('#judgeC').val(), $('#judgeD').val(), $('#judgeE').val() ],
+        gameId: id
+    }, getGameInfo);
 }
 
 
@@ -141,3 +171,4 @@ getGameInfo();
 $('#table').on('click', '.get-more-info', getResultInfo);
 $('#newResult').on('click', getResultInfo);
 $('#removeResult').on('click', removeResult);
+$('#saveResult').on('click', saveResult);

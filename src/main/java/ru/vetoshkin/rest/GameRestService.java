@@ -1,6 +1,10 @@
 package ru.vetoshkin.rest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import ru.vetoshkin.bean.GameResult;
 import ru.vetoshkin.core.SystemException;
 import ru.vetoshkin.service.GameService;
+import ru.vetoshkin.util.Jackson;
 
 import javax.ws.rs.*;
 
@@ -38,6 +42,14 @@ public class GameRestService {
         SimpleResponse response = new SimpleResponse();
         response.setResult(GameService.getSportsmans(gameId));
         return response;
+    }
+
+
+    @PUT
+    @Path("/gameresult/save")
+    public SimpleResponse saveResult(GameResult result) throws SystemException, JsonProcessingException {
+        System.out.println(Jackson.toJson(result));
+        return new SimpleResponse();
     }
 
 

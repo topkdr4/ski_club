@@ -50,60 +50,53 @@
     <div id="game-result" class="modal">
         <div class="modal-content">
             <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">person</i>
-                    <input type="text" id="autocomplete-input" class="autocomplete">
-                    <label for="autocomplete-input">Участник соревования</label>
+                <div class="input-field col s6">
+                    <select id="sportsman">
+                        <option value="10" selected>8-14</option>
+                    </select>
+                    <label>Спортсмен</label>
                 </div>
 
-                <div class="row center-align">
-
-                    <div class="input-field col s1">
-                    </div>
-
-                    <div class="input-field col s2">
-                        <input id="judgeA" type="text">
-                        <label for="judgeA">Судья A</label>
-                    </div>
-
-                    <div class="input-field col s2">
-                        <input id="judgeB" type="text">
-                        <label for="judgeB">Судья B</label>
-                    </div>
-
-                    <div class="input-field col s2">
-                        <input id="judgeC" type="text">
-                        <label for="judgeC">Судья C</label>
-                    </div>
-
-                    <div class="input-field col s2">
-                        <input id="judgeD" type="text">
-                        <label for="judgeD">Судья D</label>
-                    </div>
-
-                    <div class="input-field col s2">
-                        <input id="judgeE" type="text">
-                        <label for="judgeE">Судья E</label>
-                    </div>
-
-                    <div class="input-field col s1">
-                    </div>
-
-                    <div class="input-field col s4">
-                        <input id="range" type="text">
-                        <label for="range">Дальность прыжка</label>
-                    </div>
-
-                    <div class="input-field col s4">
-                        <input id="compensation" type="text">
-                        <label for="compensation">Компенсация</label>
-                    </div>
-
-                    <div class="input-field col s4">
-                        <input id="wind" type="text">
-                        <label for="wind">Поправка на ветер</label>
-                    </div>
+                <div class="input-field col s6">
+                    <input id="range" type="text" placeholder="Дальность прыжка">
+                    <label for="range">Дальность прыжка</label>
                 </div>
+
+                <div class="input-field col s6">
+                    <input id="compensation" type="text" placeholder="Компенсация">
+                    <label for="compensation">Компенсация</label>
+                </div>
+
+                <div class="input-field col s6">
+                    <input id="wind" type="text" placeholder="Поправка на ветер">
+                    <label for="wind">Поправка на ветер</label>
+                </div>
+
+                <div class="input-field col s4">
+                    <input id="judgeA" type="text" placeholder="Судья А">
+                    <label for="judgeA">Судья A</label>
+                </div>
+
+                <div class="input-field col s4">
+                    <input id="judgeB" type="text" placeholder="Судья B">
+                    <label for="judgeB">Судья B</label>
+                </div>
+
+                <div class="input-field col s4">
+                    <input id="judgeC" type="text" placeholder="Судья C">
+                    <label for="judgeC">Судья C</label>
+                </div>
+
+                <div class="input-field col s4">
+                    <input id="judgeD" type="text" placeholder="Судья D">
+                    <label for="judgeD">Судья D</label>
+                </div>
+
+                <div class="input-field col s4">
+                    <input id="judgeE" type="text" placeholder="Судья E">
+                    <label for="judgeE">Судья E</label>
+                </div>
+
             </div>
         </div>
         <div class="modal-footer">
