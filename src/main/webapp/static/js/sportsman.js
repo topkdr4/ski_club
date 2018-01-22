@@ -33,7 +33,7 @@
 
     Sportsman.removeSportsman = function(sportsmanId, callback) {
         Application.remove("/sportsman/remove/" + sportsmanId, {id: sportsmanId}, function(data) {
-            window.location.hash = '#sportsmanId-page-' + Sportsman.page;
+            window.location.hash = '#sportsman-page-' + Sportsman.page;
         });
     };
 

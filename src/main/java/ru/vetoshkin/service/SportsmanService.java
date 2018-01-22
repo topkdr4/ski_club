@@ -1,18 +1,18 @@
 package ru.vetoshkin.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.postgresql.util.PGobject;
+import ru.vetoshkin.bean.Place;
 import ru.vetoshkin.bean.Sportsman;
-import ru.vetoshkin.bean.Trainer;
+import ru.vetoshkin.bean.SportsmanResult;
 import ru.vetoshkin.core.HikariPool;
 import ru.vetoshkin.core.SystemException;
-import ru.vetoshkin.util.Jackson;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -33,8 +33,20 @@ public class SportsmanService {
     }
 
 
-    public static void removeSportsman(int key) {
-        throw new UnsupportedOperationException("remove sportsman not supported");
+    public static void removeSportsman(int id) throws SystemException {
+        String method = "{call remove_sportsman(?)}";
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(false);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.setInt(1, id);
+
+            logger.info(method);
+            statement.execute();
+            connection.commit();
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
     }
 
 
@@ -107,7 +119,7 @@ public class SportsmanService {
         result.setQualification(set.getString(8));
         result.setSex(set.getBoolean(9));
 
-        String method = "select get_places(?)";
+        String method = "SELECT get_places(?)";
 
         try (Connection connection = HikariPool.getSource().getConnection()) {
             connection.setAutoCommit(true);
@@ -194,5 +206,97 @@ public class SportsmanService {
 
     public static int getAllSportsmansCount() throws SystemException {
         return Service.getCount("{? = call get_sportsmans_count()}");
+    }
+
+
+    public static List<Place> getSportsmanPlaces(int id) throws SystemException {
+        String method = "SELECT get_all_places(?)";
+
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            List<Place> result = new ArrayList<>();
+            connection.setAutoCommit(true);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.setInt(1, id);
+
+            logger.info(method);
+            ResultSet resSet = statement.executeQuery();
+            Integer[] array = new Integer[0];
+            if (resSet.next())
+                array = (Integer[]) resSet.getArray(1).getArray();
+
+
+            for (Integer integer : array) {
+                Place place = new Place();
+                place.setPlace(integer);
+                result.add(place);
+            }
+
+            resSet.close();
+
+            setGameDate(result, id);
+
+            return result;
+        } catch (Exception e) {
+            logger.warn(e);
+            throw new SystemException(e);
+        }
+    }
+
+
+    private static void setGameDate(List<Place> games, int id) throws SystemException {
+        String method = "{? = call get_sportsmans_game_list(?)}";
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(false);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.OTHER);
+            statement.setInt(2, id);
+
+            logger.info(method);
+            statement.execute();
+
+            ResultSet set = (ResultSet) statement.getObject(1);
+            int index = 0;
+            while (set.next()) {
+                Place place = games.get(index);
+                place.setName(set.getString(2));
+                place.setDate(set.getDate(3));
+                index++;
+            }
+
+        } catch (Exception e) {
+            logger.warn(e);
+            throw new SystemException(e);
+        }
+    }
+
+
+    public static List<SportsmanResult> getSportsmanResult(int id) throws SystemException {
+        String method = "{? = call get_sportsman_standard_result(?)}";
+        List<SportsmanResult> result = new ArrayList<>();
+        try (Connection connection = HikariPool.getSource().getConnection()) {
+            connection.setAutoCommit(false);
+
+            CallableStatement statement = connection.prepareCall(method);
+            statement.registerOutParameter(1, Types.OTHER);
+            statement.setInt(2, id);
+
+            logger.info(method);
+            statement.execute();
+
+            ResultSet set = (ResultSet) statement.getObject(1);
+            while (set.next()) {
+                SportsmanResult sportsmanResult = new SportsmanResult();
+                sportsmanResult.setName(set.getString(1));
+                sportsmanResult.setDate(set.getDate(2));
+                sportsmanResult.setSuccess(set.getBoolean(3));
+                result.add(sportsmanResult);
+            }
+            return result;
+        } catch (Exception e) {
+            logger.warn(e);
+            throw new SystemException(e);
+        }
     }
 }

@@ -22,7 +22,6 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class SportsmanRestService {
 
     private static final Logger logger = LogManager.getLogger(SportsmanRestService.class);
-    private static final Response EMPTY = Response.status(200).build();
 
 
     @GET
@@ -56,6 +55,26 @@ public class SportsmanRestService {
 
 
     @GET
+    @Path("/places/get/{id}")
+    public SimpleResponse getSportsmanPlaces(@PathParam("id") int id) throws SystemException {
+        logger.debug("get sportsmans places");
+        SimpleResponse response = new SimpleResponse();
+        response.setResult(SportsmanService.getSportsmanPlaces(id));
+        return response;
+    }
+
+
+    @GET
+    @Path("/result/get/{id}")
+    public SimpleResponse getSportsmanResult(@PathParam("id") int id) throws SystemException {
+        logger.debug("get sportsmans result");
+        SimpleResponse response = new SimpleResponse();
+        response.setResult(SportsmanService.getSportsmanResult(id));
+        return response;
+    }
+
+
+    @GET
     @Path("/get/{id}")
     public Sportsman getSportsman(@PathParam("id") int id) throws SystemException {
         logger.debug("get sportsman info with id: " + id);
@@ -65,10 +84,10 @@ public class SportsmanRestService {
 
     @DELETE
     @Path("/remove/{id}")
-    public Response removeSportsman(@PathParam("id") int id) {
+    public SimpleResponse removeSportsman(@PathParam("id") int id) throws SystemException {
         logger.debug("remove sportsman with id: " + id);
         SportsmanService.removeSportsman(id);
-        return EMPTY;
+        return new SimpleResponse();
     }
 
 
