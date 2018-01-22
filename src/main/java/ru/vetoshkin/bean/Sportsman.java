@@ -24,7 +24,6 @@ import java.util.Map;
  * даты выполнения спортивных нормативов
  * и физиологические характеристики спортсмена в это время)
  * */
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Sportsman {
 
     private static final String[] placeString = { "first", "second", "third" };
@@ -48,7 +47,7 @@ public class Sportsman {
     }
 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -12,7 +12,7 @@
  Target Server Version : 90604
  File Encoding         : 65001
 
- Date: 20/01/2018 21:49:09
+ Date: 22/01/2018 10:11:59
 */
 
 
@@ -38,6 +38,17 @@ MAXVALUE 9223372036854775807
 START 10
 CACHE 1;
 COMMENT ON SEQUENCE "public"."seq_game_info" IS 't_games_list';
+
+-- ----------------------------
+-- Sequence structure for seq_mind
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."seq_mind";
+CREATE SEQUENCE "public"."seq_mind" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
 
 -- ----------------------------
 -- Sequence structure for seq_result
@@ -155,6 +166,16 @@ INSERT INTO "public"."t_games_list" VALUES (3, 'Первенство', '2017-12-
 INSERT INTO "public"."t_games_list" VALUES (1, 'Чемпионат', '2018-01-17', 't', 4);
 
 -- ----------------------------
+-- Table structure for t_mind
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."t_mind";
+CREATE TABLE "public"."t_mind" (
+  "id" int4 NOT NULL,
+  "fk_standard_result" int4
+)
+;
+
+-- ----------------------------
 -- Table structure for t_sportsman
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."t_sportsman";
@@ -176,7 +197,8 @@ CREATE TABLE "public"."t_sportsman" (
 -- ----------------------------
 INSERT INTO "public"."t_sportsman" VALUES (62, 'Ветошкин', 'Александр', 180, 180, '1988-01-07', '2005', 'III разряд', 't');
 INSERT INTO "public"."t_sportsman" VALUES (63, 'Захаров', 'Сергей', 180, 180, '1988-01-07', '2005', 'III разряд', 't');
-INSERT INTO "public"."t_sportsman" VALUES (61, 'Решетов', 'Арсений', 180, 180, '2018-01-10', '2005', 'III разряд', 't');
+INSERT INTO "public"."t_sportsman" VALUES (61, 'Решетов', 'Арсений', 180, 180, '1988-01-01', '2005', 'III разряд', 't');
+INSERT INTO "public"."t_sportsman" VALUES (1, 'Ололошкин', 'Тратаушкин', 80, 140, '1988-01-22', '2014', 'Мастер спорта', 't');
 
 -- ----------------------------
 -- Table structure for t_standarts_directory
@@ -252,6 +274,7 @@ CREATE TABLE "public"."t_trainer" (
 -- Records of t_trainer
 -- ----------------------------
 INSERT INTO "public"."t_trainer" VALUES (52, 'Юдкина', 'Екатерина', 'Инструктор, инструктор-методист высшего уровня квалификации первой категории', '2018-01-17');
+INSERT INTO "public"."t_trainer" VALUES (64, 'Лучший', 'Тренер', 'Тренер-преподаватель среднего уровня квалификации первой категории', '1973-01-05');
 
 -- ----------------------------
 -- Function structure for _navicat_temp_stored_proc
@@ -1036,10 +1059,11 @@ END; $BODY$
 -- ----------------------------
 SELECT setval('"public"."seq_game"', 6, true);
 SELECT setval('"public"."seq_game_info"', 13, true);
+SELECT setval('"public"."seq_mind"', 2, false);
 SELECT setval('"public"."seq_result"', 4, false);
-SELECT setval('"public"."seq_sportsman"', 2, false);
+SELECT setval('"public"."seq_sportsman"', 2, true);
 SELECT setval('"public"."seq_std"', 7, true);
-SELECT setval('"public"."seq_trainer"', 64, true);
+SELECT setval('"public"."seq_trainer"', 65, true);
 
 -- ----------------------------
 -- Uniques structure for table t_age_types
@@ -1055,6 +1079,11 @@ ALTER TABLE "public"."t_age_types" ADD CONSTRAINT "t_age_types_pkey" PRIMARY KEY
 -- Primary Key structure for table t_games_list
 -- ----------------------------
 ALTER TABLE "public"."t_games_list" ADD CONSTRAINT "t_games_list_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table t_mind
+-- ----------------------------
+ALTER TABLE "public"."t_mind" ADD CONSTRAINT "t_mind_pkey" PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Primary Key structure for table t_sportsman
@@ -1086,6 +1115,11 @@ ALTER TABLE "public"."t_games" ADD CONSTRAINT "fk_sportm" FOREIGN KEY ("fk_sport
 -- Foreign Keys structure for table t_games_list
 -- ----------------------------
 ALTER TABLE "public"."t_games_list" ADD CONSTRAINT "fk_ag" FOREIGN KEY ("fk_age") REFERENCES "public"."t_age_types" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table t_mind
+-- ----------------------------
+ALTER TABLE "public"."t_mind" ADD CONSTRAINT "fk_res" FOREIGN KEY ("fk_standard_result") REFERENCES "public"."t_standarts_result" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Keys structure for table t_standarts_result

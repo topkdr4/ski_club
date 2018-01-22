@@ -35,7 +35,35 @@ Vue.component('sportsman-info', {
     props: [ 'sportsman' ],
     template: '<div class="col s12">\n' +
     '        <div class="row" id="sportsman-form">\n' +
-    '            <div class="row">\n' +
+    '<div class="row" v-if="sportsman.id">' +
+    '<div class="col s12 card">\n' +
+    '                    <ul class="tabs tabs-fixed-width tabes">\n' +
+    '                        <li class="tab col s3"><a href="#info" class="active teal-text text-darken-2">Информация</a></li>\n' +
+    '                        <li class="tab col s3"><a href="#speca" class="teal-text text-darken-2">Нормативы</a></li>\n' +
+    '                        <li class="tab col s3"><a href="#records" class="teal-text text-darken-2">Рекроды</a></li>\n' +
+    '                        <li class="tab col s3"><a href="#games" class="teal-text text-darken-2">Соревнования</a></li>\n' +
+    '                        <li class="tab col s3"><a href="#prognoz" class="teal-text text-darken-2">Прогноз</a></li>\n' +
+    '                    </ul>\n' +
+    '                </div>' +
+    '</div>' +
+    '<div class="row">\n' +
+    '                            <div class="col s4 card">\n' +
+    '                                <div class="collapsible-header valign-wrapper">\n' +
+    '                                    <img src="static/icons/awards/award-1.png" alt="" class="circle">0\n' +
+    '                                </div>\n' +
+    '                            </div>\n' +
+    '                            <div class="col s4 card">\n' +
+    '                                <div class="collapsible-header valign-wrapper">\n' +
+    '                                    <img src="static/icons/awards/award-2.png" alt="" class="circle">0\n' +
+    '                                </div>\n' +
+    '                            </div>\n' +
+    '                            <div class="col s4 card">\n' +
+    '                                <div class="collapsible-header valign-wrapper">\n' +
+    '                                    <img src="static/icons/awards/award-3.png" alt="" class="circle">0\n' +
+    '                                </div>\n' +
+    '                            </div>\n' +
+    '                        </div>' +
+    '            <div class="row" id="info">\n' +
     '                <div class="col s3 card">\n' +
     '                    <div class="col s12">\n' +
     '                        <div  v-bind:class="[{fullMan : sportsman.sex}, {fullWom : !sportsman.sex}]"></div>\n' +
