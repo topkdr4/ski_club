@@ -19,13 +19,9 @@
 </nav>
 
 <div class="row">
-
     <div class="col s10">
-
         <div class="row" id="sportsman-info">
-
             <div class="row">
-
                 <div class="col s12 card">
                     <ul class="tabs tabs-fixed-width tabes">
                         <li class="tab col s3"><a href="#info" class="active teal-text text-darken-2">Информация</a></li>
@@ -34,15 +30,9 @@
                         <li class="tab col s3"><a href="#prognoz" class="teal-text text-darken-2">Прогноз</a></li>
                     </ul>
                 </div>
-
                 <div class="row" id="info">
-
-                    <div class="col s3 card person-image-preview fullMan">
-                    </div>
-
+                    <div class="col s3 card person-image-preview fullMan"></div>
                     <div class="col s9">
-
-                        <!-- mode to games tab -->
                         <div class="row">
                             <div class="col s4 card">
                                 <div class="collapsible-header valign-wrapper">
@@ -60,24 +50,19 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row card">
-
                             <div class="input-field col s4">
                                 <input id="family" type="text" class="validate">
                                 <label for="family">Фамилия</label>
                             </div>
-
                             <div class="input-field col s4">
                                 <input id="name" type="text" class="validate">
                                 <label for="name">Имя</label>
                             </div>
-
                             <div class="input-field col s4">
                                 <input id="sub_name" type="text" class="validate">
                                 <label for="sub_name">Отчество</label>
                             </div>
-
                             <div class="input-field col s4">
                                 <select>
                                     <option value="" disabled selected>Квалификация</option>
@@ -90,22 +75,18 @@
                                     <option value="7">Нет</option>
                                 </select>
                             </div>
-
                             <div class="input-field col s4">
                                 <input id="weight" type="number" class="validate">
                                 <label for="weight">Вес</label>
                             </div>
-
                             <div class="input-field col s4">
                                 <input id="height" type="number" class="validate">
                                 <label for="height">Рост</label>
                             </div>
-
                             <div class="input-field col s6">
                                 <input id="dayOfBirth" type="text" class="datepicker">
                                 <label for="dayOfBirth">Дата рождения</label>
                             </div>
-
                             <div class="col s2">
                                 <p>
                                     <input name="sex" type="radio" id="man-sex" checked/>
@@ -116,7 +97,6 @@
                                     <label for="wom-sex">Женский</label>
                                 </p>
                             </div>
-
                             <div class="col s2">
                                 <p>
                                     <a class="waves-effect waves-light btn-large teal darken-2">Сохранить</a>
@@ -128,12 +108,9 @@
                                        class="waves-effect waves-light btn-large red darken-4 modal-trigger">Удалить</a>
                                 </p>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-
                 <div class="row" id="standards">
                     <table id="std_table" class="striped centered card">
                         <thead>
@@ -152,10 +129,8 @@
                                 <td>Сдано</td>
                             </tr>
                         </tbody>
-
                     </table>
                 </div>
-
                 <div class="row" id="games">
                     <table id="game_table" class="striped centered card">
                         <thead>
@@ -174,14 +149,14 @@
                                 <td>1-ое место</td>
                             </tr>
                         </tbody>
-
                     </table>
                 </div>
-
+                <div class="row" id="prognoz">
+                    <div class="row" id="graph">
+                    </div>
+                </div>
             </div>
-
         </div>
-
     </div>
 </div>
 
@@ -198,6 +173,7 @@
 
 
 <script type="text/javascript" src="../static/js/jquery.js"></script>
+<script type="text/javascript" src="../static/js/highcharts.js"></script>
 <script type="text/javascript" src="../static/lib/materialize/js/materialize.min.js"></script>
 
 <script>
@@ -214,7 +190,42 @@
             closeOnSelect: false // Close upon selecting a date,
         });
     });
+
+    Highcharts.chart('graph', {
+        xAxis: {
+            min: -0.5,
+            max: 5.5
+        },
+        yAxis: {
+            min: 0
+        },
+        title: {
+            text: 'Scatter plot with regression line'
+        },
+        series: [{
+            type: 'line',
+            name: 'Regression Line',
+            data: [[0, 1.11], [5, 4.51]],
+            marker: {
+                enabled: false
+            },
+            states: {
+                hover: {
+                    lineWidth: 0
+                }
+            },
+            enableMouseTracking: false
+        }, {
+            type: 'scatter',
+            name: 'Observations',
+            data: [1, 1.5, 2.8, 3.5, 3.9, 4.2],
+            marker: {
+                radius: 4
+            }
+        }]
+    });
 </script>
+
 
 </body>
 </html>

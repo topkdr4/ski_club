@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../static/css/others.css">
+    <link type="text/css" rel="stylesheet" href="../static/lib/materialize/css/materialize.min.css"
+          media="screen,projection"/>
+</head>
+<body>
+
+<div class="col s12">
+    <div class="row" id="sportsman-form">
+        <div class="row" v-if="sportsman.id">
+            <div class="col s12 card">
+                <ul class="tabs tabs-fixed-width tabes">
+                    <li class="tab col s3"><a href="#info" class="active teal-text text-darken-2">Информация</a></li>
+                    <li class="tab col s3"><a href="#speca" class="teal-text text-darken-2">Нормативы</a></li>
+                    <li class="tab col s3"><a href="#records" class="teal-text text-darken-2">Рекроды</a></li>
+                    <li class="tab col s3"><a href="#games" class="teal-text text-darken-2">Соревнования</a></li>
+                    <li class="tab col s3"><a href="#prognoz" class="teal-text text-darken-2">Прогноз</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4 card">
+                <div class="collapsible-header valign-wrapper">
+                    <img src="static/icons/awards/award-1.png" alt="" class="circle">0
+                </div>
+            </div>
+            <div class="col s4 card">
+                <div class="collapsible-header valign-wrapper">
+                    <img src="static/icons/awards/award-2.png" alt="" class="circle">0
+                </div>
+            </div>
+            <div class="col s4 card">
+                <div class="collapsible-header valign-wrapper">
+                    <img src="static/icons/awards/award-3.png" alt="" class="circle">0
+                </div>
+            </div>
+        </div>
+        <div class="row" id="info">
+            <div class="col s3 card">
+                <div class="col s12">
+                    <div v-bind:class="[{fullMan : sportsman.sex}, {fullWom : !sportsman.sex}]"></div>
+                </div>
+            </div>
+            <div class="col s9 card">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input v-model="sportsman.family" placeholder="Фамилия" id="family" type="text" class="validate">
+                    </div>
+                    <div class="input-field col s4">
+                        <input v-model="sportsman.name" placeholder="Имя" id="name" type="text" class="validate">
+                    </div>
+                    <div class="input-field col s4">
+                        <select>
+                            <option value="1">Мастер спорта международного класса</option>
+                            <option value="2">Мастер спорта</option>
+                            <option value="3">Кандидат в мастера спорта</option>
+                            <option value="4">I разряд</option>
+                            <option value="5">II разряд</option>
+                            <option value="6">III разряд</option>
+                            <option value="7">Нет</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s4">
+                        <input v-model="sportsman.weight" placeholder="Вес" id="weight" type="text" class="validate">
+                    </div>
+                    <div class="input-field col s4">
+                        <input v-model="sportsman.height" placeholder="Рост" id="height" type="number" class="validate">
+                    </div>
+                    <div class="input-field col s4">
+                        <input placeholder="Дата рождения" id="dayOfBirth" type="text" class="datepicker">
+                    </div>
+                    <div class="input-field col s3">
+                        <input v-model="sportsman.yearOfStart" placeholder="Начало занятий" id="sportStart" type="number">
+                    </div>
+                    <div class="col s3">
+                        <p>
+                            <input name="sex" type="radio" id="man-sex" checked @click="change_sex"/>
+                            <label for="man-sex">Мужской</label>
+                        </p>
+                        <p>
+                            <input name="sex" type="radio" id="wom-sex" @click="change_sex"/>
+                            <label for="wom-sex">Женский</label>
+                        </p>
+                    </div>
+                    <div class="col s3">
+                        <p>
+                            <a class="waves-effect waves-light btn-large teal darken-2" @click="save">Сохранить</a>
+                        </p>
+                    </div>
+                    <div class="col s3" v-if="sportsman.id">
+                        <p>
+                            <a class="waves-effect waves-light btn-large red darken-2" @click="remove">Удалить</a>
+                        </p>
+                    </div>
+                    <div class="col s12" v-if="sportsman.id">
+                        <p>
+                            <a :href="href">К списку спортсменов</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../static/js/jquery.js"></script>
+<script type="text/javascript" src="../static/js/highcharts.js"></script>
+<script type="text/javascript" src="../static/lib/materialize/js/materialize.min.js"></script>
+
+<script>
+    (document).ready(function () {
+        $('ul.tabs').tabs();
+        $('.modal').modal();
+        $('select').material_select();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Сегодня',
+            clear: 'Отчистить',
+            close: 'Ok',
+            closeOnSelect: false // Close upon selecting a date,
+        });
+    });
+</script>
+</body>
+</html>

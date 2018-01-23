@@ -49,6 +49,7 @@
 </div>
 
 <script type="text/javascript" src="../static/js/sportsman.js"></script>
+<script type="text/javascript" src="../static/js/highcharts.js"></script>
 <script type="text/javascript" src="../static/components/sportsman-component.js"></script>
 
 

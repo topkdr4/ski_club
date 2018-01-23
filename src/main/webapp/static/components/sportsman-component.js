@@ -33,102 +33,139 @@ Vue.component('sportsman-cards', {
 
 Vue.component('sportsman-info', {
     props: [ 'sportsman' ],
-    template: '<div class="col s12">\n' +
-    '        <div class="row" id="sportsman-form">\n' +
-    '<div class="row" v-if="sportsman.id">' +
-    '<div class="col s12 card">\n' +
-    '                    <ul class="tabs tabs-fixed-width tabes">\n' +
-    '                        <li class="tab col s3"><a href="#info" class="active teal-text text-darken-2">Информация</a></li>\n' +
-    '                        <li class="tab col s3"><a href="#speca" class="teal-text text-darken-2">Нормативы</a></li>\n' +
-    '                        <li class="tab col s3"><a href="#records" class="teal-text text-darken-2">Рекроды</a></li>\n' +
-    '                        <li class="tab col s3"><a href="#games" class="teal-text text-darken-2">Соревнования</a></li>\n' +
-    '                        <li class="tab col s3"><a href="#prognoz" class="teal-text text-darken-2">Прогноз</a></li>\n' +
-    '                    </ul>\n' +
-    '                </div>' +
-    '</div>' +
-    '<div class="row">\n' +
-    '                            <div class="col s4 card">\n' +
-    '                                <div class="collapsible-header valign-wrapper">\n' +
-    '                                    <img src="static/icons/awards/award-1.png" alt="" class="circle">0\n' +
-    '                                </div>\n' +
-    '                            </div>\n' +
-    '                            <div class="col s4 card">\n' +
-    '                                <div class="collapsible-header valign-wrapper">\n' +
-    '                                    <img src="static/icons/awards/award-2.png" alt="" class="circle">0\n' +
-    '                                </div>\n' +
-    '                            </div>\n' +
-    '                            <div class="col s4 card">\n' +
-    '                                <div class="collapsible-header valign-wrapper">\n' +
-    '                                    <img src="static/icons/awards/award-3.png" alt="" class="circle">0\n' +
-    '                                </div>\n' +
-    '                            </div>\n' +
-    '                        </div>' +
-    '            <div class="row" id="info">\n' +
-    '                <div class="col s3 card">\n' +
-    '                    <div class="col s12">\n' +
-    '                        <div  v-bind:class="[{fullMan : sportsman.sex}, {fullWom : !sportsman.sex}]"></div>\n' +
+    template: '<div class="row" id="sportsman-form">\n' +
+    '        <div class="row" v-if="sportsman.id">\n' +
+    '            <div class="col s12 card">\n' +
+    '                <ul class="tabs tabs-fixed-width tabes">' +
+    '                    <li class="tab col s3"><a href="#info" class="active teal-text text-darken-2">Информация</a></li>\n' +
+    '                    <li class="tab col s3"><a href="#standards" class="teal-text text-darken-2">Нормативы</a></li>\n' +
+    '                    <li class="tab col s3"><a href="#games" class="teal-text text-darken-2">Соревнования</a></li>\n' +
+    '                    <li class="tab col s3"><a href="#prognoz" class="teal-text text-darken-2">Прогноз</a></li>' +
+    '                </ul>\n' +
+    '            </div>\n' +
+    '        </div>\n' +
+    '        <div class="row" id="info">\n' +
+    '            <div class="col s3 card" v-bind:class="[{fullMan : sportsman.sex}, {fullWom : !sportsman.sex}]">\n' +
+    '                 </div>\n' +
+    '            <div class="col s9">\n' +
+    '                <div class="row" v-if="sportsman.id">\n' +
+    '                   <div class="col s4 card">\n' +
+    '                      <div class="collapsible-header valign-wrapper flow-text" style="justify-content: space-evenly;">\n' +
+    '                         <img src="static/icons/awards/award-1.png" alt="" class="circle">{{sportsman.places.first}}\n' +
+    '                      </div>\n' +
+    '                   </div>\n' +
+    '                   <div class="col s4 card">\n' +
+    '                      <div class="collapsible-header valign-wrapper flow-text" style="justify-content: space-evenly;">\n' +
+    '                         <img src="static/icons/awards/award-2.png" alt="" class="circle">{{sportsman.places.second}}\n' +
+    '                      </div>\n' +
     '                    </div>\n' +
-    '                </div>\n' +
-    '                <div class="col s9 card">\n' +
-    '                    <div class="row">\n' +
-    '                        <div class="input-field col s4">\n' +
-    '                            <input v-model="sportsman.family" placeholder="Фамилия" id="family" type="text" class="validate">\n' +
-    '                        </div>\n' +
-    '                        <div class="input-field col s4">\n' +
-    '                            <input v-model="sportsman.name" placeholder="Имя" id="name" type="text" class="validate">\n' +
-    '                        </div>\n' +
-    '                        <div class="input-field col s4">\n' +
-    '                            <select>\n' +
-    '                                <option value="1">Мастер спорта международного класса</option>\n' +
-    '                                <option value="2">Мастер спорта</option>\n' +
-    '                                <option value="3">Кандидат в мастера спорта</option>\n' +
-    '                                <option value="4">I разряд</option>\n' +
-    '                                <option value="5">II разряд</option>\n' +
-    '                                <option value="6">III разряд</option>\n' +
-    '                                <option value="7">Нет</option>\n' +
-    '                            </select>\n' +
-    '                        </div>\n' +
-    '                        <div class="input-field col s4">\n' +
-    '                            <input v-model="sportsman.weight" placeholder="Вес" id="weight" type="text" class="validate">\n' +
-    '                        </div>\n' +
-    '                        <div class="input-field col s4">\n' +
-    '                            <input v-model="sportsman.height" placeholder="Рост" id="height" type="number" class="validate">\n' +
-    '                        </div>\n' +
-    '                        <div class="input-field col s4">\n' +
-    '                            <input placeholder="Дата рождения" id="dayOfBirth" type="text" class="datepicker">\n' +
-    '                        </div>\n' +
-    '                        <div class="input-field col s3">\n' +
-    '                            <input v-model="sportsman.yearOfStart" placeholder="Начало занятий" id="sportStart" type="number">\n' +
-    '                        </div>\n' +
-    '                        <div class="col s3">\n' +
-    '                            <p>\n' +
-    '                                <input name="sex" type="radio" id="man-sex" checked @click="change_sex"/>\n' +
-    '                                <label for="man-sex">Мужской</label>\n' +
-    '                            </p>\n' +
-    '                            <p>\n' +
-    '                                <input name="sex" type="radio" id="wom-sex" @click="change_sex"/>\n' +
-    '                                <label for="wom-sex">Женский</label>\n' +
-    '                            </p>\n' +
-    '                        </div>\n' +
-    '                        <div class="col s3">\n' +
-    '                            <p>\n' +
-    '                                <a class="waves-effect waves-light btn-large teal darken-2" @click="save">Сохранить</a>\n' +
-    '                            </p>\n' +
-    '                        </div>\n' +
-    '                        <div class="col s3" v-if="sportsman.id">\n' +
-    '                            <p>\n' +
-    '                                <a class="waves-effect waves-light btn-large red darken-2" @click="remove">Удалить</a>\n' +
-    '                            </p>\n' +
-    '                        </div>\n' +
-    '                        <div class="col s12" v-if="sportsman.id">\n' +
-    '                            <p>\n' +
-    '                                <a :href="href">К списку спортсменов</a>\n' +
-    '                            </p>\n' +
-    '                        </div>\n' +
+    '                    <div class="col s4 card">\n' +
+    '                       <div class="collapsible-header valign-wrapper flow-text" style="justify-content: space-evenly;">\n' +
+    '                          <img src="static/icons/awards/award-3.png" alt="" class="circle">{{sportsman.places.third}}\n' +
+    '                       </div>\n' +
+    '                    </div>\n' +
+    '                </div>' +
+    '                <div class="row card">\n' +
+    '                    <div class="input-field col s4">\n' +
+    '                        <input v-model="sportsman.family" placeholder="Фамилия" id="family" type="text" class="validate">\n' +
+    '                    </div>\n' +
+    '                    <div class="input-field col s4">\n' +
+    '                        <input v-model="sportsman.name" placeholder="Имя" id="name" type="text" class="validate">\n' +
+    '                    </div>\n' +
+    '                    <div class="input-field col s4">\n' +
+    '                        <select>\n' +
+    '                            <option value="1">Мастер спорта международного класса</option>\n' +
+    '                            <option value="2">Мастер спорта</option>\n' +
+    '                            <option value="3">Кандидат в мастера спорта</option>\n' +
+    '                            <option value="4">I разряд</option>\n' +
+    '                            <option value="5">II разряд</option>\n' +
+    '                            <option value="6">III разряд</option>\n' +
+    '                            <option value="7">Нет</option>\n' +
+    '                        </select>\n' +
+    '                    </div>\n' +
+    '                    <div class="input-field col s4">\n' +
+    '                        <input v-model="sportsman.weight" placeholder="Вес" id="weight" type="text" class="validate">\n' +
+    '                    </div>\n' +
+    '                    <div class="input-field col s4">\n' +
+    '                        <input v-model="sportsman.height" placeholder="Рост" id="height" type="number" class="validate">\n' +
+    '                    </div>\n' +
+    '                    <div class="input-field col s4">\n' +
+    '                        <input placeholder="Дата рождения" id="dayOfBirth" type="text" class="datepicker">\n' +
+    '                    </div>\n' +
+    '                    <div class="input-field col s3">\n' +
+    '                        <input v-model="sportsman.yearOfStart" placeholder="Начало занятий" id="sportStart" type="number">\n' +
+    '                    </div>\n' +
+    '                    <div class="col s3">\n' +
+    '                        <p>\n' +
+    '                            <input name="sex" type="radio" id="man-sex" checked @click="change_sex"/>\n' +
+    '                            <label for="man-sex">Мужской</label>\n' +
+    '                        </p>\n' +
+    '                        <p>\n' +
+    '                            <input name="sex" type="radio" id="wom-sex" @click="change_sex"/>\n' +
+    '                            <label for="wom-sex">Женский</label>\n' +
+    '                        </p>\n' +
+    '                    </div>\n' +
+    '                    <div class="col s3">\n' +
+    '                        <p>\n' +
+    '                            <a class="waves-effect waves-light btn-large teal darken-2" @click="save">Сохранить</a>\n' +
+    '                        </p>\n' +
+    '                    </div>\n' +
+    '                    <div class="col s3" v-if="sportsman.id">\n' +
+    '                        <p>\n' +
+    '                            <a class="waves-effect waves-light btn-large red darken-2" @click="remove">Удалить</a>\n' +
+    '                        </p>\n' +
+    '                    </div>\n' +
+    '                    <div class="col s12" v-if="sportsman.id">\n' +
+    '                        <p>\n' +
+    '                            <a :href="href">К списку спортсменов</a>\n' +
+    '                        </p>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '            </div>\n' +
+    '        </div>' +
+    '        <div class="row" id="standards" v-if="sportsman.id">\n' +
+    '           <table id="std_table" class="striped centered card">\n' +
+    '              <thead>\n' +
+    '                 <tr>\n' +
+    '                    <th>#</th>\n' +
+    '                    <th>Норматив</th>\n' +
+    '                    <th>Дата</th>\n' +
+    '                    <th>Результат</th>\n' +
+    '                 </tr>\n' +
+    '              </thead>\n' +
+    '              <tbody>\n' +
+    '                 <tr>\n' +
+    '                    <td>1</td>\n' +
+    '                    <td>Отжимание</td>\n' +
+    '                    <td>30.01.2018</td>\n' +
+    '                    <td>Сдано</td>\n' +
+    '                 </tr>\n' +
+    '              </tbody>\n' +
+    '           </table>\n' +
+    '        </div>' +
+    '        <div class="row" id="games" v-if="sportsman.id">\n' +
+    '           <table id="game_table" class="striped centered card">\n' +
+    '              <thead>\n' +
+    '                 <tr>\n' +
+    '                    <th>#</th>\n' +
+    '                    <th>Название</th>\n' +
+    '                    <th>Дата</th>\n' +
+    '                    <th>Результат</th>\n' +
+    '                 </tr>\n' +
+    '              </thead>\n' +
+    '              <tbody>\n' +
+    '                 <tr>\n' +
+    '                    <td>1</td>\n' +
+    '                    <td>Первый этап</td>\n' +
+    '                    <td>30.01.2018</td>\n' +
+    '                    <td>1-ое место</td>\n' +
+    '                 </tr>\n' +
+    '              </tbody>\n' +
+    '           </table>\n' +
     '        </div>\n' +
+    '        <div class="row" id="prognoz" v-if="sportsman.id">\n' +
+    '           <div class="row" id="graph"></div>\n' +
+    '        </div>' +
     '    </div>',
     methods: {
         change_sex: function () {
